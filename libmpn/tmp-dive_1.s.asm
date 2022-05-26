@@ -32,7 +32,7 @@ Lodd:
 
 	;.byte 0x48,0x8d,0x15,0x00,0x00,0x00,0x00
 
-	lea	rdx, [rip + __gmp_binvert_limb_table]
+	lea	rdx, [__gmp_binvert_limb_table]
 
 	movzx	eax, byte [rdx + rax]
 

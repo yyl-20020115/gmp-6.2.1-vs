@@ -43,7 +43,7 @@ Lent:
 	shr	edx, 1
 
 	;.byte 0x4c,0x8d,0x0d,0x00,0x00,0x00,0x00 
-	lea	r9, [rip + __gmp_binvert_limb_table]
+	lea	r9, [__gmp_binvert_limb_table]
 
 
 	and	edx, 127
