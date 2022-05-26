@@ -1,4 +1,5 @@
 [Bits 64]
+	section .text
 	align 16, db 0x90
 	global __gmpn_preinv_divrem_1
 	extern __gmpn_invert_limb

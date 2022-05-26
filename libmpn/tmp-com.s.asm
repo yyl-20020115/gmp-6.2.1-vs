@@ -1,4 +1,5 @@
 [Bits 64]
+	section .text
 	align 64, db 0x90
 	global __gmpn_com
 	

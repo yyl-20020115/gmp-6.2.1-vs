@@ -50,12 +50,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="gmp-6.2.1-vs.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="assert.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -99,9 +93,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="primesieve.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="tal-debug.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="tal-notreent.c">

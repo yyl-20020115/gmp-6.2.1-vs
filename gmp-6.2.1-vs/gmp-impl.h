@@ -167,7 +167,7 @@ see https://www.gnu.org/licenses/.  */
 
 
 #ifndef WANT_TMP_DEBUG  /* for TMP_ALLOC_LIMBS_2 and others */
-#define WANT_TMP_DEBUG 1        
+#define WANT_TMP_DEBUG 0        
 #endif
 
 /* The following tries to get a good version of alloca.  The tests are
@@ -694,9 +694,9 @@ __GMP_DECLSPEC void  __gmp_tmp_debug_free (const char *, int, int,
 
 /* Enhancement: __gmp_allocate_func could have "__attribute__ ((malloc))",
    but current gcc (3.0) doesn't seem to support that.  */
-__GMP_DECLSPEC extern void * (*__gmp_allocate_func) (size_t);
-__GMP_DECLSPEC extern void * (*__gmp_reallocate_func) (void *, size_t, size_t);
-__GMP_DECLSPEC extern void   (*__gmp_free_func) (void *, size_t);
+__GMP_DECLSPEC void * (*__gmp_allocate_func) (size_t);
+__GMP_DECLSPEC void * (*__gmp_reallocate_func) (void *, size_t, size_t);
+__GMP_DECLSPEC void   (*__gmp_free_func) (void *, size_t);
 
 __GMP_DECLSPEC void *__gmp_default_allocate (size_t);
 __GMP_DECLSPEC void *__gmp_default_reallocate (void *, size_t, size_t);
@@ -1328,8 +1328,8 @@ __GMP_DECLSPEC void __gmp_randinit_mt_noseed (gmp_randstate_t);
    functions are recommended to applications which care about randomness, so
    the old functions aren't too important.  */
 
-__GMP_DECLSPEC extern char             __gmp_rands_initialized;
-__GMP_DECLSPEC extern gmp_randstate_t  __gmp_rands;
+__GMP_DECLSPEC char             __gmp_rands_initialized;
+__GMP_DECLSPEC gmp_randstate_t  __gmp_rands;
 
 #define RANDS								\
   ((__gmp_rands_initialized ? 0						\
@@ -2042,7 +2042,7 @@ _mpz_newalloc (mpz_ptr z, mp_size_t n)
    FIB_TABLE_LUCNUM_LIMIT (in fib_table.h) is the largest n for which L[n] =
    F[n] + 2*F[n-1] fits in a limb.  */
 
-__GMP_DECLSPEC extern const mp_limb_t __gmp_fib_table[];
+__GMP_DECLSPEC const mp_limb_t __gmp_fib_table[];
 #define FIB_TABLE(n)  (__gmp_fib_table[(n)+1])
 
 extern const mp_limb_t __gmp_oddfac_table[];
@@ -2908,7 +2908,7 @@ struct bases
 };
 
 #define   mp_bases __MPN(bases)
-__GMP_DECLSPEC extern const struct bases mp_bases[257];
+__GMP_DECLSPEC const struct bases mp_bases[257];
 
 
 /* Compute the number of digits in base for nbits bits, making sure the result
@@ -3301,7 +3301,7 @@ __GMP_DECLSPEC mp_limb_t mpn_modexact_1_odd (mp_srcptr, mp_size_t, mp_limb_t) __
    bit 3, for instance with (((n + 2) & 4) << 1) ^ n.  */
 
 #define binvert_limb_table  __gmp_binvert_limb_table
-__GMP_DECLSPEC extern const unsigned char  binvert_limb_table[128];
+__GMP_DECLSPEC const unsigned char  binvert_limb_table[128];
 
 #define binvert_limb(inv,n)						\
   do {									\
@@ -3919,10 +3919,10 @@ __GMP_DECLSPEC double mpn_get_d (mp_srcptr, mp_size_t, mp_size_t, long) __GMP_AT
 #endif
 
 
-__GMP_DECLSPEC extern const unsigned char __gmp_digit_value_tab[];
+__GMP_DECLSPEC const unsigned char __gmp_digit_value_tab[];
 
-__GMP_DECLSPEC extern int __gmp_junk;
-__GMP_DECLSPEC extern const int __gmp_0;
+__GMP_DECLSPEC int __gmp_junk;
+__GMP_DECLSPEC const int __gmp_0;
 __GMP_DECLSPEC void __gmp_exception (int) ATTRIBUTE_NORETURN;
 __GMP_DECLSPEC void __gmp_divide_by_zero (void) ATTRIBUTE_NORETURN;
 __GMP_DECLSPEC void __gmp_sqrt_of_negative (void) ATTRIBUTE_NORETURN;
@@ -4125,7 +4125,7 @@ __GMP_DECLSPEC mp_double_limb_t mpn_gcd_22 (mp_limb_t, mp_limb_t, mp_limb_t, mp_
 
 /* State for the Jacobi computation using Lehmer. */
 #define jacobi_table __gmp_jacobi_table
-__GMP_DECLSPEC extern const unsigned char jacobi_table[208];
+__GMP_DECLSPEC const unsigned char jacobi_table[208];
 
 /* Bit layout for the initial state. b must be odd.
 
@@ -4371,7 +4371,7 @@ __GMP_DECLSPEC mp_size_t mpn_bc_set_str (mp_ptr, const unsigned char *, size_t, 
 #define __GMPF_PREC_TO_BITS(n) \
   ((mp_bitcnt_t) (n) * GMP_NUMB_BITS - GMP_NUMB_BITS)
 
-__GMP_DECLSPEC extern mp_size_t __gmp_default_fp_limb_precision;
+__GMP_DECLSPEC mp_size_t __gmp_default_fp_limb_precision;
 
 /* Compute the number of base-b digits corresponding to nlimbs limbs, rounding
    down.  */
@@ -4697,8 +4697,8 @@ struct cpuvec_t {
   mp_size_t            sqr_toom3_threshold;
   mp_size_t            bmod_1_to_mod_1_threshold;
 };
-__GMP_DECLSPEC extern struct cpuvec_t __gmpn_cpuvec;
-__GMP_DECLSPEC extern int __gmpn_cpuvec_initialized;
+__GMP_DECLSPEC struct cpuvec_t __gmpn_cpuvec;
+__GMP_DECLSPEC int __gmpn_cpuvec_initialized;
 #endif /* x86 fat binary */
 
 __GMP_DECLSPEC void __gmpn_cpuvec_init (void);

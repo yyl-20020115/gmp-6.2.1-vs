@@ -119,14 +119,14 @@ see https://www.gnu.org/licenses/.  */
 #if __GMP_LIBGMP_DLL
 #ifdef __GMP_WITHIN_GMP
 /* compiling to go into a DLL libgmp */
-#define __GMP_DECLSPEC  __GMP_DECLSPEC_EXPORT
+#define __GMP_DECLSPEC  __GMP_DECLSPEC_EXPORT extern 
 #else
 /* compiling to go into an application which will link to a DLL libgmp */
-#define __GMP_DECLSPEC  __GMP_DECLSPEC_IMPORT
+#define __GMP_DECLSPEC  __GMP_DECLSPEC_IMPORT extern 
 #endif
 #else
 /* all other cases */
-#define __GMP_DECLSPEC
+#define __GMP_DECLSPEC extern 
 #endif
 
 
@@ -484,13 +484,13 @@ __GMP_DECLSPEC void mp_get_memory_functions (void *(**) (size_t),
 				      void (**) (void *, size_t)) __GMP_NOTHROW;
 
 #define mp_bits_per_limb __gmp_bits_per_limb
-__GMP_DECLSPEC extern const int mp_bits_per_limb;
+__GMP_DECLSPEC const int mp_bits_per_limb;
 
 #define gmp_errno __gmp_errno
-__GMP_DECLSPEC extern int gmp_errno;
+__GMP_DECLSPEC int gmp_errno;
 
 #define gmp_version __gmp_version
-__GMP_DECLSPEC extern const char * const gmp_version;
+__GMP_DECLSPEC const char * const gmp_version;
 
 
 /**************** Random number routines.  ****************/

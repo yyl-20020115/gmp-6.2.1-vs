@@ -1,4 +1,5 @@
 [Bits 64]
+		section .rdata
 	align 2, db 0x90
 	global __gmpn_invert_limb_table
 __gmpn_invert_limb_table:
