@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{2f7ab268-f6a4-43cd-ac8d-c576819d3b8d}</ProjectGuid>
+    <RootNamespace>libmpz</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\gmp-6.2.1-vs\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)\gmp-6.2.1-vs\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(SolutionDir)\gmp-6.2.1-vs\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)\gmp-6.2.1-vs\;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="aors.h" />
+    <ClInclude Include="aors_ui.h" />
+    <ClInclude Include="fits_s.h" />
+    <ClInclude Include="mul_i.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="2fac_ui.c" />
+    <ClCompile Include="abs.c" />
+    <ClCompile Include="add.c" />
+    <ClCompile Include="add_ui.c" />
+    <ClCompile Include="and.c" />
+    <ClCompile Include="aorsmul.c" />
+    <ClCompile Include="aorsmul_i.c" />
+    <ClCompile Include="array_init.c" />
+    <ClCompile Include="bin_ui.c" />
+    <ClCompile Include="bin_uiui.c" />
+    <ClCompile Include="cdiv_q.c" />
+    <ClCompile Include="cdiv_qr.c" />
+    <ClCompile Include="cdiv_qr_ui.c" />
+    <ClCompile Include="cdiv_q_ui.c" />
+    <ClCompile Include="cdiv_r.c" />
+    <ClCompile Include="cdiv_r_ui.c" />
+    <ClCompile Include="cdiv_ui.c" />
+    <ClCompile Include="cfdiv_q_2exp.c" />
+    <ClCompile Include="cfdiv_r_2exp.c" />
+    <ClCompile Include="clear.c" />
+    <ClCompile Include="clears.c" />
+    <ClCompile Include="clrbit.c" />
+    <ClCompile Include="cmp.c" />
+    <ClCompile Include="cmpabs.c" />
+    <ClCompile Include="cmpabs_d.c" />
+    <ClCompile Include="cmpabs_ui.c" />
+    <ClCompile Include="cmp_d.c" />
+    <ClCompile Include="cmp_si.c" />
+    <ClCompile Include="cmp_ui.c" />
+    <ClCompile Include="com.c" />
+    <ClCompile Include="combit.c" />
+    <ClCompile Include="cong.c" />
+    <ClCompile Include="cong_2exp.c" />
+    <ClCompile Include="cong_ui.c" />
+    <ClCompile Include="divegcd.c" />
+    <ClCompile Include="divexact.c" />
+    <ClCompile Include="dive_ui.c" />
+    <ClCompile Include="divis.c" />
+    <ClCompile Include="divis_2exp.c" />
+    <ClCompile Include="divis_ui.c" />
+    <ClCompile Include="dump.c" />
+    <ClCompile Include="export.c" />
+    <ClCompile Include="fac_ui.c" />
+    <ClCompile Include="fdiv_q.c" />
+    <ClCompile Include="fdiv_qr.c" />
+    <ClCompile Include="fdiv_qr_ui.c" />
+    <ClCompile Include="fdiv_q_ui.c" />
+    <ClCompile Include="fdiv_r.c" />
+    <ClCompile Include="fdiv_r_ui.c" />
+    <ClCompile Include="fdiv_ui.c" />
+    <ClCompile Include="fib2_ui.c" />
+    <ClCompile Include="fib_ui.c" />
+    <ClCompile Include="fits_sint.c" />
+    <ClCompile Include="fits_slong.c" />
+    <ClCompile Include="fits_sshort.c" />
+    <ClCompile Include="fits_uint.c" />
+    <ClCompile Include="fits_ulong.c" />
+    <ClCompile Include="fits_ushort.c" />
+    <ClCompile Include="gcd.c" />
+    <ClCompile Include="gcdext.c" />
+    <ClCompile Include="gcd_ui.c" />
+    <ClCompile Include="getlimbn.c" />
+    <ClCompile Include="get_d.c" />
+    <ClCompile Include="get_d_2exp.c" />
+    <ClCompile Include="get_si.c" />
+    <ClCompile Include="get_str.c" />
+    <ClCompile Include="get_ui.c" />
+    <ClCompile Include="hamdist.c" />
+    <ClCompile Include="import.c" />
+    <ClCompile Include="init.c" />
+    <ClCompile Include="init2.c" />
+    <ClCompile Include="inits.c" />
+    <ClCompile Include="inp_raw.c" />
+    <ClCompile Include="inp_str.c" />
+    <ClCompile Include="invert.c" />
+    <ClCompile Include="ior.c" />
+    <ClCompile Include="iset.c" />
+    <ClCompile Include="iset_d.c" />
+    <ClCompile Include="iset_si.c" />
+    <ClCompile Include="iset_str.c" />
+    <ClCompile Include="iset_ui.c" />
+    <ClCompile Include="jacobi.c" />
+    <ClCompile Include="kronsz.c" />
+    <ClCompile Include="kronuz.c" />
+    <ClCompile Include="kronzs.c" />
+    <ClCompile Include="kronzu.c" />
+    <ClCompile Include="lcm.c" />
+    <ClCompile Include="lcm_ui.c" />
+    <ClCompile Include="limbs_finish.c" />
+    <ClCompile Include="limbs_modify.c" />
+    <ClCompile Include="limbs_read.c" />
+    <ClCompile Include="limbs_write.c" />
+    <ClCompile Include="lucmod.c" />
+    <ClCompile Include="lucnum2_ui.c" />
+    <ClCompile Include="lucnum_ui.c" />
+    <ClCompile Include="mfac_uiui.c" />
+    <ClCompile Include="millerrabin.c" />
+    <ClCompile Include="mod.c" />
+    <ClCompile Include="mul.c" />
+    <ClCompile Include="mul_2exp.c" />
+    <ClCompile Include="mul_si.c" />
+    <ClCompile Include="mul_ui.c" />
+    <ClCompile Include="neg.c" />
+    <ClCompile Include="nextprime.c" />
+    <ClCompile Include="n_pow_ui.c" />
+    <ClCompile Include="oddfac_1.c" />
+    <ClCompile Include="out_raw.c" />
+    <ClCompile Include="out_str.c" />
+    <ClCompile Include="perfpow.c" />
+    <ClCompile Include="perfsqr.c" />
+    <ClCompile Include="popcount.c" />
+    <ClCompile Include="powm.c" />
+    <ClCompile Include="powm_sec.c" />
+    <ClCompile Include="powm_ui.c" />
+    <ClCompile Include="pow_ui.c" />
+    <ClCompile Include="pprime_p.c" />
+    <ClCompile Include="primorial_ui.c" />
+    <ClCompile Include="prodlimbs.c" />
+    <ClCompile Include="random.c" />
+    <ClCompile Include="random2.c" />
+    <ClCompile Include="realloc.c" />
+    <ClCompile Include="realloc2.c" />
+    <ClCompile Include="remove.c" />
+    <ClCompile Include="roinit_n.c" />
+    <ClCompile Include="root.c" />
+    <ClCompile Include="rootrem.c" />
+    <ClCompile Include="rrandomb.c" />
+    <ClCompile Include="scan0.c" />
+    <ClCompile Include="scan1.c" />
+    <ClCompile Include="set.c" />
+    <ClCompile Include="setbit.c" />
+    <ClCompile Include="set_d.c" />
+    <ClCompile Include="set_f.c" />
+    <ClCompile Include="set_q.c" />
+    <ClCompile Include="set_si.c" />
+    <ClCompile Include="set_str.c" />
+    <ClCompile Include="set_ui.c" />
+    <ClCompile Include="size.c" />
+    <ClCompile Include="sizeinbase.c" />
+    <ClCompile Include="sqrt.c" />
+    <ClCompile Include="sqrtrem.c" />
+    <ClCompile Include="stronglucas.c" />
+    <ClCompile Include="sub.c" />
+    <ClCompile Include="sub_ui.c" />
+    <ClCompile Include="swap.c" />
+    <ClCompile Include="tdiv_q.c" />
+    <ClCompile Include="tdiv_qr.c" />
+    <ClCompile Include="tdiv_qr_ui.c" />
+    <ClCompile Include="tdiv_q_2exp.c" />
+    <ClCompile Include="tdiv_q_ui.c" />
+    <ClCompile Include="tdiv_r.c" />
+    <ClCompile Include="tdiv_r_2exp.c" />
+    <ClCompile Include="tdiv_r_ui.c" />
+    <ClCompile Include="tdiv_ui.c" />
+    <ClCompile Include="tstbit.c" />
+    <ClCompile Include="ui_pow_ui.c" />
+    <ClCompile Include="ui_sub.c" />
+    <ClCompile Include="urandomb.c" />
+    <ClCompile Include="urandomm.c" />
+    <ClCompile Include="xor.c" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
