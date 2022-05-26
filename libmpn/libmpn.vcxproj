@@ -80,7 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="add.c" />
-    <ClCompile Include="add_1.c" />
     <ClCompile Include="add_n_sub_n.c" />
     <ClCompile Include="bdiv_q.c" />
     <ClCompile Include="bdiv_qr.c" />
@@ -89,7 +88,6 @@
     <ClCompile Include="brootinv.c" />
     <ClCompile Include="bsqrt.c" />
     <ClCompile Include="bsqrtinv.c" />
-    <ClCompile Include="cmp.c" />
     <ClCompile Include="cnd_swap.c" />
     <ClCompile Include="comb_tables.c" />
     <ClCompile Include="compute_powtab.c" />
@@ -105,7 +103,6 @@
     <ClCompile Include="div_q.c" />
     <ClCompile Include="div_qr_1.c" />
     <ClCompile Include="div_qr_2.c" />
-    <ClCompile Include="dummy.c" />
     <ClCompile Include="dump.c" />
     <ClCompile Include="fib2m.c" />
     <ClCompile Include="fib2_ui.c" />
@@ -150,7 +147,6 @@
     <ClCompile Include="mu_divappr_q.c" />
     <ClCompile Include="mu_div_q.c" />
     <ClCompile Include="mu_div_qr.c" />
-    <ClCompile Include="neg.c" />
     <ClCompile Include="nussbaumer_mul.c" />
     <ClCompile Include="perfpow.c" />
     <ClCompile Include="perfsqr.c" />
@@ -172,7 +168,6 @@
     <ClCompile Include="sbpi1_div_qr.c" />
     <ClCompile Include="scan0.c" />
     <ClCompile Include="scan1.c" />
-    <ClCompile Include="sec_add_1.c" />
     <ClCompile Include="sec_div_qr.c" />
     <ClCompile Include="sec_div_r.c" />
     <ClCompile Include="sec_invert.c" />
@@ -190,8 +185,6 @@
     <ClCompile Include="sqrmod_bnm1.c" />
     <ClCompile Include="sqrtrem.c" />
     <ClCompile Include="strongfibo.c" />
-    <ClCompile Include="sub.c" />
-    <ClCompile Include="sub_1.c" />
     <ClCompile Include="tdiv_qr.c" />
     <ClCompile Include="toom22_mul.c" />
     <ClCompile Include="toom2_sqr.c" />
@@ -305,6 +298,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4005;4146;4244;4013;4016;4018;4267;4101;4996;4334;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -326,6 +320,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4005;4146;4244;4013;4016;4018;4267;4101;4996;4334;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -347,6 +342,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4005;4146;4244;4013;4016;4018;4267;4101;4996;4334;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -368,6 +364,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4005;4146;4244;4013;4016;4018;4267;4101;4996;4334;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>

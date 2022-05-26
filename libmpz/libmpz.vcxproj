@@ -94,6 +94,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4005;4146;4244;4013;4016;4018;4267;4101;4996;4334;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -115,6 +116,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4005;4146;4244;4013;4016;4018;4267;4101;4996;4334;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -136,6 +138,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4005;4146;4244;4013;4016;4018;4267;4101;4996;4334;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -157,6 +160,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <DisableSpecificWarnings>4005;4146;4244;4013;4016;4018;4267;4101;4996;4334;</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -292,7 +296,6 @@
     <ClCompile Include="powm_sec.c" />
     <ClCompile Include="powm_ui.c" />
     <ClCompile Include="pow_ui.c" />
-    <ClCompile Include="pprime_p.c" />
     <ClCompile Include="primorial_ui.c" />
     <ClCompile Include="prodlimbs.c" />
     <ClCompile Include="random.c" />

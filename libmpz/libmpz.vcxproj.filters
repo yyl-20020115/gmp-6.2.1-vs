@@ -74,9 +74,6 @@
     <ClCompile Include="powm_ui.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="pprime_p.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="primorial_ui.c">
       <Filter>源文件</Filter>
     </ClCompile>
