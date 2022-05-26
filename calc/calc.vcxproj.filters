@@ -24,6 +24,9 @@
     <ClCompile Include="calcread.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="calcmain.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="calc.h">
