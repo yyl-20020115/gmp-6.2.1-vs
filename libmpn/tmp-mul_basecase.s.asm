@@ -51,7 +51,9 @@ Lm1s0:
 	mov	[rdi + r9 * 8], rax
 	mov	rax, [rsi + r9 * 8 + 8]
 	mov	rbx, rdx
-	lea	rbp, [Ldo_am0]
+	;NOTICE: changes	
+	;lea	rbp, qword [Ldo_am0]
+	mov rbp, Ldo_am0
 	;.byte 0x48,0x8d,0x2d,0x58,0x02,0x00,0x00
 	jmp	Lm1e0
 
@@ -61,7 +63,9 @@ Lm1s2:
 	mov	rax, [rsi + r9 * 8 + 8]
 	mov	rbx, rdx
 	mul	r10
-	lea	rbp, [Ldo_am2]
+	;NOTICE: changes
+	;lea	rbp, qword [Ldo_am2]
+	mov rbp, Ldo_am2
 	;.byte 0x48,0x8d,0x2d,0xa9,0x06,0x00,0x00
 	test	r13, r13
 	jnz	Lm1e2
@@ -82,7 +86,9 @@ Lm1s1:
 	jz	L1
 	mov	rax, [rsi + r9 * 8 + 8]
 	mov	rcx, rdx
-	lea	rbp, [Ldo_am1]
+	;NOTICE: changes
+	;lea	rbp, qword [Ldo_am1]
+	mov rbp, Ldo_am1
 	;.byte 0x48,0x8d,0x2d,0x2f,0x04,0x00,0x00
 	jmp	Lm1e1
 L1:
@@ -94,7 +100,9 @@ Lm1s3:
 	mov	[rdi + r9 * 8], rax
 	mov	rax, [rsi + r9 * 8 + 8]
 	mov	rcx, rdx
-	lea	rbp, [Ldo_am3]
+	;NOTICE: changes
+	;lea	rbp, qword [Ldo_am3]
+	mov rbp, Ldo_am3
 	;.byte 0x48,0x8d,0x2d,0x8f,0x08,0x00,0x00
 	jmp	Lm1e3
 

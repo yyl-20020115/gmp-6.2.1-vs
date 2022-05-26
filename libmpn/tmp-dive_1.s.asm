@@ -31,9 +31,9 @@ Lodd:
 	and	eax, 127
 
 	;.byte 0x48,0x8d,0x15,0x00,0x00,0x00,0x00
-
-	lea	rdx, [__gmp_binvert_limb_table]
-
+	;NOTICE: changes
+	;lea	rdx, qword [__gmp_binvert_limb_table]
+	mov rdx, __gmp_binvert_limb_table
 	movzx	eax, byte [rdx + rax]
 
 	mov	r11, rbx

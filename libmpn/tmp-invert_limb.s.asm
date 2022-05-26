@@ -17,8 +17,10 @@ __gmpn_invert_limb:
 	shr	rax, 55
 	
 	;.byte 0x4c,0x8d,0x05,0x00,0xfe,0xff,0xff
-	
-	lea	r8, [__gmpn_invert_limb_table - 512]
+	;NOTICE: changes
+	;lea	r8, qword [__gmpn_invert_limb_table - 512]
+	mov r8, __gmpn_invert_limb_table - 512
+
 	movzx	ecx, word [r8 + rax * 2]
 
 	

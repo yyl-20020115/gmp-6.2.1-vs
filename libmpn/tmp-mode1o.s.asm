@@ -41,10 +41,10 @@ Lent:
 
 	mov	r8, rdx
 	shr	edx, 1
-
+	;NOTICE: changes
 	;.byte 0x4c,0x8d,0x0d,0x00,0x00,0x00,0x00 
-	lea	r9, [__gmp_binvert_limb_table]
-
+	;lea	r9, qword [__gmp_binvert_limb_table]
+	mov r9, __gmp_binvert_limb_table
 
 	and	edx, 127
 	mov	r10, rcx

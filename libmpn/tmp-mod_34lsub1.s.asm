@@ -72,7 +72,9 @@ Ltop:
 	jnc	Ltop
 
 Lend:
-	lea	r8, [Ltab]
+	;NOTICE: changes
+	;lea	r8, qword [Ltab]
+	mov r8, Ltab
 	;.byte 0x4c,0x8d,0x05,0x00,0x00,0x00,0x00
 	movsx	r10, dword [r8 + rsi * 4 + 36]
 	add	r8, r10
