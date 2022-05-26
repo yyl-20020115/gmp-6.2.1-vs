@@ -369,6 +369,7 @@ __GMP_DECLSPEC void  __gmp_tmp_reentrant_free (struct tmp_reentrant_t *);
 #endif
 
 #if WANT_TMP_ALLOCA
+
 #define TMP_SDECL
 #define TMP_DECL		struct tmp_reentrant_t *__tmp_marker
 #define TMP_SMARK
@@ -399,6 +400,16 @@ __GMP_DECLSPEC void  __gmp_tmp_reentrant_free (struct tmp_reentrant_t *);
 #endif
 
 #if WANT_TMP_NOTREENTRANT
+#undef TMP_ALLOC
+#undef TMP_FREE
+#undef TMP_BALLOC
+#undef TMP_SALLOC
+#undef TMP_DECL
+#undef TMP_SDECL
+#undef TMP_SFREE
+#undef TMP_MARK
+#undef TMP_SMARK
+
 struct tmp_marker
 {
   struct tmp_stack *which_chunk;

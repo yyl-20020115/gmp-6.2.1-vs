@@ -38,9 +38,6 @@
     <ClCompile Include="n_pow_ui.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="neg.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="nextprime.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -54,9 +51,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="perfpow.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="perfsqr.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="popcount.c">
@@ -399,9 +393,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="get_str.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="get_ui.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="getlimbn.c">

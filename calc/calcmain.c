@@ -1,10 +1,10 @@
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <gmp.h>
-
 extern mpz_t  variable[26];
 extern mpz_t    stack[100];
-
+int yyparse(void);
 int calc_option_readline = -1;
 #ifndef numberof
 #define numberof(x)  (sizeof (x) / sizeof ((x)[0]))

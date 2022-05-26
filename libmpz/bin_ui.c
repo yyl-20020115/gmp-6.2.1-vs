@@ -116,7 +116,7 @@ mpz_hmul_nbnpk (mpz_ptr r, mpz_srcptr n, unsigned long int k, mpz_ptr t)
   mpz_mul (r, t, t);
   mpz_add (r, r, n);
   posmpz_rsh1 (r);
-  if (LIKELY (k <= (1UL << (BITS_PER_ULONG / 2))))
+  if (LIKELY (k <= (1ULL << (BITS_PER_ULONG / 2))))
     posmpz_dec_ui (r, (k + (k & 1))*(k >> 1));
   else
     {

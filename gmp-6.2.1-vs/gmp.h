@@ -1782,7 +1782,7 @@ mpz_get_ui (mpz_srcptr __gmp_z) __GMP_NOTHROW
      "ULONG_MAX < GMP_NUMB_MASK".  */
 #if GMP_NAIL_BITS == 0 || defined (_LONG_LONG_LIMB)
   /* limb==long and no nails, or limb==longlong, one limb is enough */
-  return (__gmp_n != 0 ? __gmp_l : 0);
+  return (__gmp_n != 0 ? (unsigned long)__gmp_l : 0);
 #else
   /* limb==long and nails, need two limbs when available */
   __gmp_n = __GMP_ABS (__gmp_n);

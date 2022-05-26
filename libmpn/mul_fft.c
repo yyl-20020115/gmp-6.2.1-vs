@@ -506,7 +506,7 @@ mpn_fft_mul_modF_K (mp_ptr *ap, mp_ptr *bp, mp_size_t n, mp_size_t K)
       for (i = 0; i <= k; i++)
 	{
 	  fft_l[i] = tmp;
-	  tmp += (mp_size_t) 1 << i;
+	  tmp += (mp_size_t) (1ULL << i);
 	}
 
       mpn_fft_initl (fft_l, k);
@@ -878,7 +878,7 @@ mpn_mul_fft (mp_ptr op, mp_size_t pl,
   for (i = 0; i <= k; i++)
     {
       fft_l[i] = tmp;
-      tmp += (mp_size_t) 1 << i;
+      tmp += (mp_size_t)(1ULL << i);
     }
 
   mpn_fft_initl (fft_l, k);

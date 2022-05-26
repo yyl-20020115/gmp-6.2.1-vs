@@ -64,6 +64,8 @@
 #define YYPULL 1
 
 
+extern int yylex();
+extern int yyerror(char* s);
 
 
 /* First part of user prologue.  */
@@ -1966,7 +1968,8 @@ yyreturn:
 #line 264 "../../../gmp/demos/calc/calc.y"
 
 
-yyerror (char *s)
+int yyerror (char *s)
 {
   fprintf (stderr, "%s\n", s);
+  return 0;
 }

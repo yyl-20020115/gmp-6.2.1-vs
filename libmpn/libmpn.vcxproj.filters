@@ -250,9 +250,6 @@
     <ClCompile Include="toom_eval_pm2exp.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="toom_eval_pm2rexp.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="toom_interpolate_5pts.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -520,9 +517,6 @@
     <ClCompile Include="sec_sqr.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="sec_sub_1.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="sizeinbase.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -533,9 +527,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="div_q.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="add.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="add_n_sub_n.c">
@@ -608,6 +599,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="perfsqr.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="toom_eval_pm2rexp.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
