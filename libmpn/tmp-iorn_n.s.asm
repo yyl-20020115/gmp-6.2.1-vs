@@ -1,83 +1,171 @@
-[Bits 64]
-	section .text
-	align 32, db 0x90
-	global __gmpn_iorn_n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	32, 0x90
+	.globl	__gmpn_iorn_n
 	
-	;.def	__gmpn_iorn_n
-	;.scl	2
-	;.type	32
-	;.endef
+	.def	__gmpn_iorn_n
+	.scl	2
+	.type	32
+	.endef
 __gmpn_iorn_n:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	mov	r8, [rdx]
-	not	r8
-	mov	eax, ecx
-	and	eax, 3
+	mov	(%rdx), %r8
+	not	%r8
+	mov	%ecx, %eax
+	and	$3, %eax
 	je	Lb00
-	cmp	eax, 2
+	cmp	$2, %eax
 	jc	Lb01
 	je	Lb10
 
-Lb11:
-	or	r8, [rsi]
-	mov	[rdi], r8
-	inc	rcx
-	lea	rsi, [rsi - 8]
-	lea	rdx, [rdx - 8]
-	lea	rdi, [rdi - 8]
+Lb11:	or	(%rsi), %r8
+	mov	%r8, (%rdi)
+	inc	%rcx
+	lea	-8(%rsi), %rsi
+	lea	-8(%rdx), %rdx
+	lea	-8(%rdi), %rdi
 	jmp	Le11
-Lb10:
-	add	rcx, 2
-	lea	rsi, [rsi - 16]
-	lea	rdx, [rdx - 16]
-	lea	rdi, [rdi - 16]
+Lb10:	add	$2, %rcx
+	lea	-16(%rsi), %rsi
+	lea	-16(%rdx), %rdx
+	lea	-16(%rdi), %rdi
 	jmp	Le10
-Lb01:
-	or	r8, [rsi]
-	mov	[rdi], r8
-	dec	rcx
+Lb01:	or	(%rsi), %r8
+	mov	%r8, (%rdi)
+	dec	%rcx
 	jz	Lret
-	lea	rsi, [rsi + 8]
-	lea	rdx, [rdx + 8]
-	lea	rdi, [rdi + 8]
+	lea	8(%rsi), %rsi
+	lea	8(%rdx), %rdx
+	lea	8(%rdi), %rdi
 
-	align 16, db 0x90
-Ltop:
-	mov	r8, [rdx]
-	not	r8
-Lb00:
-	mov	r9, [rdx + 8]
-	not	r9
-	or	r8, [rsi]
-	or	r9, [rsi + 8]
-	mov	[rdi], r8
-	mov	[rdi + 8], r9
-Le11:
-	mov	r8, [rdx + 16]
-	not	r8
-Le10:
-	mov	r9, [rdx + 24]
-	not	r9
-	lea	rdx, [rdx + 32]
-	or	r8, [rsi + 16]
-	or	r9, [rsi + 24]
-	lea	rsi, [rsi + 32]
-	mov	[rdi + 16], r8
-	mov	[rdi + 24], r9
-	lea	rdi, [rdi + 32]
-	sub	rcx, 4
+	.align	16, 0x90
+Ltop:	mov	(%rdx), %r8
+	not	%r8
+Lb00:	mov	8(%rdx), %r9
+	not	%r9
+	or	(%rsi), %r8
+	or	8(%rsi), %r9
+	mov	%r8, (%rdi)
+	mov	%r9, 8(%rdi)
+Le11:	mov	16(%rdx), %r8
+	not	%r8
+Le10:	mov	24(%rdx), %r9
+	not	%r9
+	lea	32(%rdx), %rdx
+	or	16(%rsi), %r8
+	or	24(%rsi), %r9
+	lea	32(%rsi), %rsi
+	mov	%r8, 16(%rdi)
+	mov	%r9, 24(%rdi)
+	lea	32(%rdi), %rdi
+	sub	$4, %rcx
 	jnz	Ltop
 
-Lret:
-	pop	rsi
-	pop	rdi
+Lret:	pop	%rsi
+	pop	%rdi
 	ret
 	
 

@@ -1,206 +1,281 @@
-[Bits 64]
-	section .text
-	align 16, db 0x90
-	global __gmpn_preinv_divrem_1
-	extern __gmpn_invert_limb
-	;.def	__gmpn_preinv_divrem_1
-	;.scl	2
-	;.type	32
-	;.endef
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	16, 0x90
+	.globl	__gmpn_preinv_divrem_1
+	
+	.def	__gmpn_preinv_divrem_1
+	.scl	2
+	.type	32
+	.endef
 __gmpn_preinv_divrem_1:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	mov	r8, [rsp + 56]
-	mov	r9, [rsp + 64]
-	xor	eax, eax
-	push	r13
-	push	r12
-	push	rbp
-	push	rbx
+	mov	56(%rsp), %r8	
+	mov	64(%rsp), %r9	
+	xor	%eax, %eax
+	push	%r13
+	push	%r12
+	push	%rbp
+	push	%rbx
 
-	mov	r12, rsi
-	mov	rbx, rcx
-	add	rcx, rsi
-	mov	rsi, rdx
+	mov	%rsi, %r12
+	mov	%rcx, %rbx
+	add	%rsi, %rcx
+	mov	%rdx, %rsi
 
-	lea	rdi, [rdi + rcx * 8 - 8]
+	lea	-8(%rdi,%rcx,8), %rdi
 
-	mov	cl, [rsp + 104]
-	shl	r8, cl
+	mov	104(%rsp), %cl
+	shl	%cl, %r8
 	jmp	Lent
 	
 
-	align 16, db 0x90
-	global __gmpn_divrem_1
+	.align	16, 0x90
+	.globl	__gmpn_divrem_1
 	
-	;.def	__gmpn_divrem_1
-	;.scl	2
-	;.type	32
-	;.endef
+	.def	__gmpn_divrem_1
+	.scl	2
+	.type	32
+	.endef
 __gmpn_divrem_1:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	mov	r8, [rsp + 56]
-	xor	eax, eax
-	push	r13
-	push	r12
-	push	rbp
-	push	rbx
+	mov	56(%rsp), %r8	
+	xor	%eax, %eax
+	push	%r13
+	push	%r12
+	push	%rbp
+	push	%rbx
 
-	mov	r12, rsi
-	mov	rbx, rcx
-	add	rcx, rsi
-	mov	rsi, rdx
+	mov	%rsi, %r12
+	mov	%rcx, %rbx
+	add	%rsi, %rcx
+	mov	%rdx, %rsi
 	je	Lret
 
-	lea	rdi, [rdi + rcx * 8 - 8]
-	xor	ebp, ebp
+	lea	-8(%rdi,%rcx,8), %rdi
+	xor	%ebp, %ebp
 
 Lunnormalized:
-	test	rbx, rbx
+	test	%rbx, %rbx
 	je	L44
-	mov	rax, [rsi + rbx * 8 - 8]
-	cmp	rax, r8
+	mov	-8(%rsi,%rbx,8), %rax
+	cmp	%r8, %rax
 	jae	L44
-	mov	[rdi], rbp
-	mov	rbp, rax
-	lea	rdi, [rdi - 8]
+	mov	%rbp, (%rdi)
+	mov	%rax, %rbp
+	lea	-8(%rdi), %rdi
 	je	Lret
-	dec	rbx
+	dec	%rbx
 L44:
-	bsr	rcx, r8
-	not	ecx
-	sal	r8, cl
-	sal	rbp, cl
+	bsr	%r8, %rcx
+	not	%ecx
+	sal	%cl, %r8
+	sal	%cl, %rbp
 
-	push	rcx
-
-
-	push	r8
+	push	%rcx
 
 
-	sub	rsp, 40
-	mov	rcx, r8
+	push	%r8
+
+
+	sub	$40, %rsp	
+	mov	%r8, %rcx		
 	
 	call	__gmpn_invert_limb
 
-	add	rsp, 40
-	pop	r8
+	add	$40, %rsp	
+	pop	%r8
 
 
-	pop	rcx
+	pop	%rcx
 
-	mov	r9, rax
-	mov	rax, rbp
-	test	rbx, rbx
+	mov	%rax, %r9
+	mov	%rbp, %rax
+	test	%rbx, %rbx
 	je	Lfrac
 
-Lent:
-	mov	rbp, [rsi + rbx * 8 - 8]
-	shr	rax, cl
-	shld	rax, rbp, cl
-	sub	rbx, 2
+Lent:	mov	-8(%rsi,%rbx,8), %rbp
+	shr	%cl, %rax
+	shld	%cl, %rbp, %rax
+	sub	$2, %rbx
 	js	Lend
 
-	align 16, db 0x90
-Ltop:
-	lea	r11, [rax + 1]
-	mul	r9
-	mov	r10, [rsi + rbx * 8]
-	shld	rbp, r10, cl
-	mov	r13, rbp
-	add	r13, rax
-	adc	rdx, r11
-	mov	r11, rdx
-	imul	rdx, r8
-	sub	rbp, rdx
-	lea	rax, [r8 + rbp]
-	sub	rdi, 8
-	cmp	rbp, r13
-	cmovc	rax, rbp
-	adc	r11, -1
-	cmp	rax, r8
+	.align	16, 0x90
+Ltop:	lea	1(%rax), %r11
+	mul	%r9
+	mov	(%rsi,%rbx,8), %r10
+	shld	%cl, %r10, %rbp
+	mov	%rbp, %r13
+	add	%rax, %r13
+	adc	%r11, %rdx
+	mov	%rdx, %r11
+	imul	%r8, %rdx
+	sub	%rdx, %rbp
+	lea	(%r8,%rbp), %rax
+	sub	$8, %rdi
+	cmp	%r13, %rbp
+	cmovc	%rbp, %rax
+	adc	$-1, %r11
+	cmp	%r8, %rax
 	jae	Lufx
-Luok:
-	dec	rbx
-	mov	[rdi + 8], r11
-	mov	rbp, r10
+Luok:	dec	%rbx
+	mov	%r11, 8(%rdi)
+	mov	%r10, %rbp
 	jns	Ltop
 
-Lend:
-	lea	r11, [rax + 1]
-	sal	rbp, cl
-	mul	r9
-	add	rax, rbp
-	adc	rdx, r11
-	mov	r11, rax
-	mov	r13, rdx
-	imul	rdx, r8
-	sub	rbp, rdx
-	mov	rax, r8
-	add	rax, rbp
-	cmp	rbp, r11
-	cmovc	rax, rbp
-	adc	r13, -1
-	cmp	rax, r8
+Lend:	lea	1(%rax), %r11
+	sal	%cl, %rbp
+	mul	%r9
+	add	%rbp, %rax
+	adc	%r11, %rdx
+	mov	%rax, %r11
+	mov	%rdx, %r13
+	imul	%r8, %rdx
+	sub	%rdx, %rbp
+	mov	%r8, %rax
+	add	%rbp, %rax
+	cmp	%r11, %rbp
+	cmovc	%rbp, %rax
+	adc	$-1, %r13
+	cmp	%r8, %rax
 	jae	Lefx
-Leok:
-	mov	[rdi], r13
-	sub	rdi, 8
+Leok:	mov	%r13, (%rdi)
+	sub	$8, %rdi
 	jmp	Lfrac
 
-Lufx:
-	sub	rax, r8
-	inc	r11
+Lufx:	sub	%r8, %rax
+	inc	%r11
 	jmp	Luok
-Lefx:
-	sub	rax, r8
-	inc	r13
+Lefx:	sub	%r8, %rax
+	inc	%r13
 	jmp	Leok
 
-Lfrac:
-mov	rbp, r8
-	neg	rbp
+Lfrac:mov	%r8, %rbp
+	neg	%rbp
 	jmp	Lfent
 
-	align 16, db 0x90
-Lftop:
-mul	r9
-	add	rdx, r11
-	mov	r11, rax
-	mov	r13, rdx
-	imul	rdx, rbp
-	mov	rax, r8
-	add	rax, rdx
-	cmp	rdx, r11
-	cmovc	rax, rdx
-	adc	r13, -1
-	mov	[rdi], r13
-	sub	rdi, 8
-Lfent:
-lea	r11, [rax + 1]
-	dec	r12
-	jns	Lftop
+	.align	16, 0x90			
+Lftop:mul	%r9			
+	add	%r11, %rdx		
+	mov	%rax, %r11		
+	mov	%rdx, %r13		
+	imul	%rbp, %rdx		
+	mov	%r8, %rax			
+	add	%rdx, %rax		
+	cmp	%r11, %rdx		
+	cmovc	%rdx, %rax		
+	adc	$-1, %r13		
+	mov	%r13, (%rdi)		
+	sub	$8, %rdi			
+Lfent:lea	1(%rax), %r11		
+	dec	%r12			
+	jns	Lftop			
 
-	shr	rax, cl
-Lret:
-	pop	rbx
-	pop	rbp
-	pop	r12
-	pop	r13
-	pop	rsi
-	pop	rdi
+	shr	%cl, %rax
+Lret:	pop	%rbx
+	pop	%rbp
+	pop	%r12
+	pop	%r13
+	pop	%rsi
+	pop	%rdi
 	ret
 	

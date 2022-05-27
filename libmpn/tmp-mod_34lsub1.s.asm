@@ -1,176 +1,237 @@
-[Bits 64]
-	section .text
-	align 32, db 0x90
-	global __gmpn_mod_34lsub1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	32, 0x90
+	.globl	__gmpn_mod_34lsub1
 	
-	;.def	__gmpn_mod_34lsub1
-	;.scl	2
-	;.type	32
-	;.endef
+	.def	__gmpn_mod_34lsub1
+	.scl	2
+	.type	32
+	.endef
 __gmpn_mod_34lsub1:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
 
 
-	mov	r11, 0x0000FFFFFFFFFFFF
+	mov	$0x0000FFFFFFFFFFFF, %r11
 
-	mov	rax, [rdi]
+	mov	(%rdi), %rax
 
-	cmp	rsi, 2
+	cmp	$2, %rsi
 	ja	Lgt2
 
 	jb	Lone
 
-	mov	rsi, [rdi + 8]
-	mov	rdx, rax
-	shr	rax, 48
+	mov	8(%rdi), %rsi
+	mov	%rax, %rdx
+	shr	$48, %rax		
 
-	and	rdx, r11
-	add	rax, rdx
-	mov	edx, esi
+	and	%r11, %rdx		
+	add	%rdx, %rax
+	mov	%esi, %edx
 
-	shr	rsi, 32
-	add	rax, rsi
+	shr	$32, %rsi		
+	add	%rsi, %rax
 
-	shl	rdx, 16
-	add	rax, rdx
-Lone:
-	pop	rsi
-	pop	rdi
+	shl	$16, %rdx		
+	add	%rdx, %rax
+Lone:	pop	%rsi
+	pop	%rdi
 	ret
 
 
 
 
 
-Lgt2:
-	mov	rcx, [rdi + 8]
-	mov	rdx, [rdi + 16]
-	xor	r9, r9
-	add	rdi, 24
-	sub	rsi, 12
+Lgt2:	mov	8(%rdi), %rcx
+	mov	16(%rdi), %rdx
+	xor	%r9, %r9
+	add	$24, %rdi
+	sub	$12, %rsi
 	jc	Lend
-	align 16, db 0x90
+	.align	16, 0x90
 Ltop:
-	add	rax, [rdi]
-	adc	rcx, [rdi + 8]
-	adc	rdx, [rdi + 16]
-	adc	r9, 0
-	add	rax, [rdi + 24]
-	adc	rcx, [rdi + 32]
-	adc	rdx, [rdi + 40]
-	adc	r9, 0
-	add	rax, [rdi + 48]
-	adc	rcx, [rdi + 56]
-	adc	rdx, [rdi + 64]
-	adc	r9, 0
-	add	rdi, 72
-	sub	rsi, 9
+	add	(%rdi), %rax
+	adc	8(%rdi), %rcx
+	adc	16(%rdi), %rdx
+	adc	$0, %r9
+	add	24(%rdi), %rax
+	adc	32(%rdi), %rcx
+	adc	40(%rdi), %rdx
+	adc	$0, %r9
+	add	48(%rdi), %rax
+	adc	56(%rdi), %rcx
+	adc	64(%rdi), %rdx
+	adc	$0, %r9
+	add	$72, %rdi
+	sub	$9, %rsi
 	jnc	Ltop
 
 Lend:
-	;NOTICE: changes
-	;lea	r8, qword [Ltab]
-	mov r8, Ltab
-	;.byte 0x4c,0x8d,0x05,0x00,0x00,0x00,0x00
-	movsx	r10, dword [r8 + rsi * 4 + 36]
-	add	r8, r10
-	jmp	r8
+	lea	Ltab(%rip), %r8
+	movslq	36(%r8,%rsi,4), %r10
+	add	%r10, %r8
+	jmp	*%r8
 
-		section .rdata
-	align 8, db 0x90
-Ltab:
-	dd L0-Ltab
-	dd L1-Ltab
-	dd L2-Ltab
-	dd L3-Ltab
-	dd L4-Ltab
-	dd L5-Ltab
-	dd L6-Ltab
-	dd L7-Ltab
-	dd L8-Ltab
-	section .text
+		.section .rdata,"dr"
+	.align	8, 0x90
+Ltab:	.long	L0-Ltab
+	.long	L1-Ltab
+	.long	L2-Ltab
+	.long	L3-Ltab
+	.long	L4-Ltab
+	.long	L5-Ltab
+	.long	L6-Ltab
+	.long	L7-Ltab
+	.long	L8-Ltab
+	.text
 
-L6:
-	add	rax, [rdi]
-	adc	rcx, [rdi + 8]
-	adc	rdx, [rdi + 16]
-	adc	r9, 0
-	add	rdi, 24
-L3:
-	add	rax, [rdi]
-	adc	rcx, [rdi + 8]
-	adc	rdx, [rdi + 16]
+L6:	add	(%rdi), %rax
+	adc	8(%rdi), %rcx
+	adc	16(%rdi), %rdx
+	adc	$0, %r9
+	add	$24, %rdi
+L3:	add	(%rdi), %rax
+	adc	8(%rdi), %rcx
+	adc	16(%rdi), %rdx
 	jmp	Lcj1
 
-L7:
-	add	rax, [rdi]
-	adc	rcx, [rdi + 8]
-	adc	rdx, [rdi + 16]
-	adc	r9, 0
-	add	rdi, 24
-L4:
-	add	rax, [rdi]
-	adc	rcx, [rdi + 8]
-	adc	rdx, [rdi + 16]
-	adc	r9, 0
-	add	rdi, 24
-L1:
-	add	rax, [rdi]
-	adc	rcx, 0
+L7:	add	(%rdi), %rax
+	adc	8(%rdi), %rcx
+	adc	16(%rdi), %rdx
+	adc	$0, %r9
+	add	$24, %rdi
+L4:	add	(%rdi), %rax
+	adc	8(%rdi), %rcx
+	adc	16(%rdi), %rdx
+	adc	$0, %r9
+	add	$24, %rdi
+L1:	add	(%rdi), %rax
+	adc	$0, %rcx
 	jmp	Lcj2
 
-L8:
-	add	rax, [rdi]
-	adc	rcx, [rdi + 8]
-	adc	rdx, [rdi + 16]
-	adc	r9, 0
-	add	rdi, 24
-L5:
-	add	rax, [rdi]
-	adc	rcx, [rdi + 8]
-	adc	rdx, [rdi + 16]
-	adc	r9, 0
-	add	rdi, 24
-L2:
-	add	rax, [rdi]
-	adc	rcx, [rdi + 8]
+L8:	add	(%rdi), %rax
+	adc	8(%rdi), %rcx
+	adc	16(%rdi), %rdx
+	adc	$0, %r9
+	add	$24, %rdi
+L5:	add	(%rdi), %rax
+	adc	8(%rdi), %rcx
+	adc	16(%rdi), %rdx
+	adc	$0, %r9
+	add	$24, %rdi
+L2:	add	(%rdi), %rax
+	adc	8(%rdi), %rcx
 
-Lcj2:
-	adc	rdx, 0
-Lcj1:
-	adc	r9, 0
-L0:
-	add	rax, r9
-	adc	rcx, 0
-	adc	rdx, 0
-	adc	rax, 0
+Lcj2:	adc	$0, %rdx
+Lcj1:	adc	$0, %r9
+L0:	add	%r9, %rax
+	adc	$0, %rcx
+	adc	$0, %rdx
+	adc	$0, %rax
 
-	mov	rdi, rax
-	shr	rax, 48
+	mov	%rax, %rdi		
+	shr	$48, %rax		
 
-	and	rdi, r11
-	mov	r10d, ecx
+	and	%r11, %rdi		
+	mov	%ecx, %r10d	
 
-	shr	rcx, 32
+	shr	$32, %rcx		
 
-	add	rax, rdi
-	movzx	edi, dx
-	shl	r10, 16
+	add	%rdi, %rax		
+	movzwl	%dx, %edi		
+	shl	$16, %r10		
 
-	add	rax, rcx
-	shr	rdx, 16
+	add	%rcx, %rax		
+	shr	$16, %rdx		
 
-	add	rax, r10
-	shl	rdi, 32
+	add	%r10, %rax		
+	shl	$32, %rdi		
 
-	add	rax, rdx
-	add	rax, rdi
+	add	%rdx, %rax		
+	add	%rdi, %rax		
 
-	pop	rsi
-	pop	rdi
+	pop	%rsi
+	pop	%rdi
 	ret
 	

@@ -1,107 +1,168 @@
-[Bits 64]
-	section .text
-	align 16, db 0x90
-	global __gmpn_rshift
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	16, 0x90
+	.globl	__gmpn_rshift
 	
-	;.def	__gmpn_rshift
-	;.scl	2
-	;.type	32
-	;.endef
+	.def	__gmpn_rshift
+	.scl	2
+	.type	32
+	.endef
 __gmpn_rshift:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
 
-	xor	eax, eax
+	xor	%eax, %eax
 
-	test	dl, 1
+	test	$1, %dl
 	jnz	Lbx1
-Lbx0:
-	test	dl, 2
+Lbx0:	test	$2, %dl
 	jnz	Lb10
 
-Lb00:
-	lea	rsi, [rsi + 8]
-	lea	rdi, [rdi - 24]
-	mov	r10, [rsi - 8]
-	mov	r11, [rsi]
-	shrd	rax, r10, cl
-	mov	r8, [rsi + 8]
-	shr	rdx, 2
+Lb00:	lea	8(%rsi), %rsi
+	lea	-24(%rdi), %rdi
+	mov	-8(%rsi), %r10
+	mov	(%rsi), %r11
+	shrd	%cl, %r10, %rax
+	mov	8(%rsi), %r8
+	shr	$2, %rdx
 	jmp	L00
 
-Lbx1:
-	test	dl, 2
+Lbx1:	test	$2, %dl
 	jnz	Lb11
 
-Lb01:
-	lea	rsi, [rsi + 16]
-	lea	rdi, [rdi - 16]
-	mov	r9, [rsi - 16]
-	shrd	rax, r9, cl
-	shr	rdx, 2
+Lb01:	lea	16(%rsi), %rsi
+	lea	-16(%rdi), %rdi
+	mov	-16(%rsi), %r9
+	shrd	%cl, %r9, %rax
+	shr	$2, %rdx
 	jz	L1
-	mov	r10, [rsi - 8]
-	mov	r11, [rsi]
+	mov	-8(%rsi), %r10
+	mov	(%rsi), %r11
 	jmp	L01
 
-Lb10:
-	lea	rsi, [rsi + 24]
-	lea	rdi, [rdi - 8]
-	mov	r8, [rsi - 24]
-	mov	r9, [rsi - 16]
-	shrd	rax, r8, cl
-	shr	rdx, 2
+Lb10:	lea	24(%rsi), %rsi
+	lea	-8(%rdi), %rdi
+	mov	-24(%rsi), %r8
+	mov	-16(%rsi), %r9
+	shrd	%cl, %r8, %rax
+	shr	$2, %rdx
 	jz	L2
-	mov	r10, [rsi - 8]
+	mov	-8(%rsi), %r10
 	jmp	L10
 
-Lb11:
-	lea	rsi, [rsi + 32]
-	mov	r11, [rsi - 32]
-	mov	r8, [rsi - 24]
-	mov	r9, [rsi - 16]
-	shrd	rax, r11, cl
-	shr	rdx, 2
+Lb11:	lea	32(%rsi), %rsi
+	mov	-32(%rsi), %r11
+	mov	-24(%rsi), %r8
+	mov	-16(%rsi), %r9
+	shrd	%cl, %r11, %rax
+	shr	$2, %rdx
 	jz	Lend
 
-	align 16, db 0x90
-Ltop:
-	shrd	r11, r8, cl
-	mov	r10, [rsi - 8]
-	mov	[rdi], r11
-L10:
-	shrd	r8, r9, cl
-	mov	r11, [rsi]
-	mov	[rdi + 8], r8
-L01:
-	shrd	r9, r10, cl
-	mov	r8, [rsi + 8]
-	mov	[rdi + 16], r9
-L00:
-	shrd	r10, r11, cl
-	mov	r9, [rsi + 16]
-	add	rsi, 32
-	mov	[rdi + 24], r10
-	add	rdi, 32
-	dec	rdx
+	.align	16, 0x90
+Ltop:	shrd	%cl, %r8, %r11
+	mov	-8(%rsi), %r10
+	mov	%r11, (%rdi)
+L10:	shrd	%cl, %r9, %r8
+	mov	(%rsi), %r11
+	mov	%r8, 8(%rdi)
+L01:	shrd	%cl, %r10, %r9
+	mov	8(%rsi), %r8
+	mov	%r9, 16(%rdi)
+L00:	shrd	%cl, %r11, %r10
+	mov	16(%rsi), %r9
+	add	$32, %rsi
+	mov	%r10, 24(%rdi)
+	add	$32, %rdi
+	dec	%rdx
 	jnz	Ltop
 
-Lend:
-	shrd	r11, r8, cl
-	mov	[rdi], r11
-L2:
-	shrd	r8, r9, cl
-	mov	[rdi + 8], r8
-L1:
-	shr	r9, cl
-	mov	[rdi + 16], r9
-	pop	rsi
-	pop	rdi
+Lend:	shrd	%cl, %r8, %r11
+	mov	%r11, (%rdi)
+L2:	shrd	%cl, %r9, %r8
+	mov	%r8, 8(%rdi)
+L1:	shr	%cl, %r9
+	mov	%r9, 16(%rdi)
+	pop	%rsi
+	pop	%rdi
 	ret
 	

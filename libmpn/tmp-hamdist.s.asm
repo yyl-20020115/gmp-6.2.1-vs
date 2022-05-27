@@ -1,150 +1,218 @@
-[Bits 64]
-	section .text
-	align 32, db 0x90
-	global __gmpn_hamdist
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	32, 0x90
+	.globl	__gmpn_hamdist
 	
-	;.def	__gmpn_hamdist
-	;.scl	2
-	;.type	32
-	;.endef
+	.def	__gmpn_hamdist
+	.scl	2
+	.type	32
+	.endef
 __gmpn_hamdist:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
 
-	push	rbx
-	push	rbp
+	push	%rbx
+	push	%rbp
 
-	mov	r10, [rdi]
-	xor	r10, [rsi]
+	mov	(%rdi), %r10
+	xor	(%rsi), %r10
 
-	mov	r8d, edx
-	and	r8d, 3
+	mov	%edx, %r8d
+	and	$3, %r8d
 
-	xor	ecx, ecx
-	db 0xf3,0x49,0x0f,0xb8,0xc2
-	;NOTICE: changes
-	;lea	r9, qword [Ltab]
-	mov r9, Ltab
-	;.byte 0x4c,0x8d,0x0d,0x00,0x00,0x00,0x00
-	
-	;.byte 0x4f,0x63,0x04,0x81
-	movsx	r8, dword [r9 + r8 * 4]
-	add	r8, r9
-	jmp	r8
+	xor	%ecx, %ecx
+	.byte	0xf3,0x49,0x0f,0xb8,0xc2	
+
+	lea	Ltab(%rip), %r9
+
+	movslq	(%r9,%r8,4), %r8
+	add	%r9, %r8
+	jmp	*%r8
 
 
-L3:
-	mov	r10, [rdi + 8]
-	mov	r11, [rdi + 16]
-	xor	r10, [rsi + 8]
-	xor	r11, [rsi + 16]
-	xor	ebp, ebp
-	sub	rdx, 4
+L3:	mov	8(%rdi), %r10
+	mov	16(%rdi), %r11
+	xor	8(%rsi), %r10
+	xor	16(%rsi), %r11
+	xor	%ebp, %ebp
+	sub	$4, %rdx
 	jle	Lx3
-	mov	r8, [rdi + 24]
-	mov	r9, [rdi + 32]
-	add	rdi, 24
-	add	rsi, 24
+	mov	24(%rdi), %r8
+	mov	32(%rdi), %r9
+	add	$24, %rdi
+	add	$24, %rsi
 	jmp	Le3
 
-L0:
-	mov	r9, [rdi + 8]
-	xor	r9, [rsi + 8]
-	mov	r10, [rdi + 16]
-	mov	r11, [rdi + 24]
-	xor	ebx, ebx
-	xor	r10, [rsi + 16]
-	xor	r11, [rsi + 24]
-	add	rdi, 32
-	add	rsi, 32
-	sub	rdx, 4
+L0:	mov	8(%rdi), %r9
+	xor	8(%rsi), %r9
+	mov	16(%rdi), %r10
+	mov	24(%rdi), %r11
+	xor	%ebx, %ebx
+	xor	16(%rsi), %r10
+	xor	24(%rsi), %r11
+	add	$32, %rdi
+	add	$32, %rsi
+	sub	$4, %rdx
 	jle	Lx4
 
-	align 16, db 0x90
+	.align	16, 0x90
 Ltop:
-Le0:
-	db 0xf3,0x49,0x0f,0xb8,0xe9
-	mov	r8, [rdi]
-	mov	r9, [rdi + 8]
-	add	rax, rbx
-Le3:
-	db 0xf3,0x49,0x0f,0xb8,0xda
-	xor	r8, [rsi]
-	xor	r9, [rsi + 8]
-	add	rcx, rbp
-Le2:
-	db 0xf3,0x49,0x0f,0xb8,0xeb
-	mov	r10, [rdi + 16]
-	mov	r11, [rdi + 24]
-	add	rdi, 32
-	add	rax, rbx
-Le1:
-	db 0xf3,0x49,0x0f,0xb8,0xd8
-	xor	r10, [rsi + 16]
-	xor	r11, [rsi + 24]
-	add	rsi, 32
-	add	rcx, rbp
-	sub	rdx, 4
+Le0:	.byte	0xf3,0x49,0x0f,0xb8,0xe9	
+	mov	(%rdi), %r8
+	mov	8(%rdi), %r9
+	add	%rbx, %rax
+Le3:	.byte	0xf3,0x49,0x0f,0xb8,0xda	
+	xor	(%rsi), %r8
+	xor	8(%rsi), %r9
+	add	%rbp, %rcx
+Le2:	.byte	0xf3,0x49,0x0f,0xb8,0xeb	
+	mov	16(%rdi), %r10
+	mov	24(%rdi), %r11
+	add	$32, %rdi
+	add	%rbx, %rax
+Le1:	.byte	0xf3,0x49,0x0f,0xb8,0xd8	
+	xor	16(%rsi), %r10
+	xor	24(%rsi), %r11
+	add	$32, %rsi
+	add	%rbp, %rcx
+	sub	$4, %rdx
 	jg	Ltop
 
-Lx4:
-	db 0xf3,0x49,0x0f,0xb8,0xe9
-	add	rax, rbx
-Lx3:
-	db 0xf3,0x49,0x0f,0xb8,0xda
-	add	rcx, rbp
-	db 0xf3,0x49,0x0f,0xb8,0xeb
-	add	rax, rbx
-	add	rcx, rbp
-Lx2:
-	add	rax, rcx
-Lx1:
-	pop	rbp
-	pop	rbx
-	pop	rsi
-	pop	rdi
+Lx4:	.byte	0xf3,0x49,0x0f,0xb8,0xe9	
+	add	%rbx, %rax
+Lx3:	.byte	0xf3,0x49,0x0f,0xb8,0xda	
+	add	%rbp, %rcx
+	.byte	0xf3,0x49,0x0f,0xb8,0xeb	
+	add	%rbx, %rax
+	add	%rbp, %rcx
+Lx2:	add	%rcx, %rax
+Lx1:	pop	%rbp
+	pop	%rbx
+	pop	%rsi
+	pop	%rdi
 	ret
 
-L2:
-	mov	r11, [rdi + 8]
-	xor	r11, [rsi + 8]
-	sub	rdx, 2
+L2:	mov	8(%rdi), %r11
+	xor	8(%rsi), %r11
+	sub	$2, %rdx
 	jle	Ln2
-	mov	r8, [rdi + 16]
-	mov	r9, [rdi + 24]
-	xor	ebx, ebx
-	xor	r8, [rsi + 16]
-	xor	r9, [rsi + 24]
-	add	rdi, 16
-	add	rsi, 16
+	mov	16(%rdi), %r8
+	mov	24(%rdi), %r9
+	xor	%ebx, %ebx
+	xor	16(%rsi), %r8
+	xor	24(%rsi), %r9
+	add	$16, %rdi
+	add	$16, %rsi
 	jmp	Le2
-Ln2:
-	db 0xf3,0x49,0x0f,0xb8,0xcb
+Ln2:	.byte	0xf3,0x49,0x0f,0xb8,0xcb	
 	jmp	Lx2
 
-L1:
-	dec	rdx
+L1:	dec	%rdx
 	jle	Lx1
-	mov	r8, [rdi + 8]
-	mov	r9, [rdi + 16]
-	xor	r8, [rsi + 8]
-	xor	r9, [rsi + 16]
-	xor	ebp, ebp
-	mov	r10, [rdi + 24]
-	mov	r11, [rdi + 32]
-	add	rdi, 40
-	add	rsi, 8
+	mov	8(%rdi), %r8
+	mov	16(%rdi), %r9
+	xor	8(%rsi), %r8
+	xor	16(%rsi), %r9
+	xor	%ebp, %ebp
+	mov	24(%rdi), %r10
+	mov	32(%rdi), %r11
+	add	$40, %rdi
+	add	$8, %rsi
 	jmp	Le1
 
 	
-		section .rdata
-	align 8, db 0x90
-Ltab:
-	dd L0-Ltab
-	dd L1-Ltab
-	dd L2-Ltab
-	dd L3-Ltab
+		.section .rdata,"dr"
+	.align	8, 0x90
+Ltab:	.long	L0-Ltab
+	.long	L1-Ltab
+	.long	L2-Ltab
+	.long	L3-Ltab

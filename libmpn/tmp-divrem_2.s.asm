@@ -1,151 +1,217 @@
-[Bits 64]
-	section .text
-	align 16, db 0x90
-	global __gmpn_divrem_2
-	extern __gmpn_invert_limb
-	;.def	__gmpn_divrem_2
-	;.scl	2
-	;.type	32
-	;.endef
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	16, 0x90
+	.globl	__gmpn_divrem_2
+	
+	.def	__gmpn_divrem_2
+	.scl	2
+	.type	32
+	.endef
 __gmpn_divrem_2:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	mov	r8, [rsp + 56]
-	push	r15
-	push	r14
-	push	r13
-	push	r12
-	lea	r12, [rdx + rcx * 8 - 24]
-	mov	r13, rsi
-	push	rbp
-	mov	rbp, rdi
-	push	rbx
-	mov	r11, [r8 + 8]
-	mov	rbx, [r12 + 16]
-	mov	r8, [r8]
-	mov	r10, [r12 + 8]
+	mov	56(%rsp), %r8	
+	push	%r15
+	push	%r14
+	push	%r13
+	push	%r12
+	lea	-24(%rdx,%rcx,8), %r12	
+	mov	%rsi, %r13
+	push	%rbp
+	mov	%rdi, %rbp
+	push	%rbx
+	mov	8(%r8), %r11		
+	mov	16(%r12), %rbx
+	mov	(%r8), %r8		
+	mov	8(%r12), %r10
 
-	xor	r15d, r15d
-	cmp	r11, rbx
+	xor	%r15d, %r15d
+	cmp	%rbx, %r11
 	ja	L2
-	setb	dl
-	cmp	r8, r10
-	setbe	al
-	or	dl, al
+	setb	%dl
+	cmp	%r10, %r8
+	setbe	%al
+	orb	%al, %dl		
 	je	L2
-	inc	r15d
-	sub	r10, r8
-	sbb	rbx, r11
+	inc	%r15d
+	sub	%r8, %r10
+	sbb	%r11, %rbx
 L2:
-	lea	r14, [rcx + r13 - 3]
-	test	r14, r14
+	lea	-3(%rcx,%r13), %r14	
+	test	%r14, %r14
 	js	Lend
 
-	push	r8
-	push	r10
-	push	r11
+	push	%r8
+	push	%r10
+	push	%r11
 
-	mov	rcx, r11
-	sub	rsp, 32
+	mov	%r11, %rcx	
+	sub	$32, %rsp	
 	
 	call	__gmpn_invert_limb
-	add	rsp, 32
-	pop	r11
-	pop	r10
-	pop	r8
+	add	$32, %rsp	
+	pop	%r11
+	pop	%r10
+	pop	%r8
 
-	mov	rdx, r11
-	mov	rdi, rax
-	imul	rdx, rax
-	mov	r9, rdx
-	mul	r8
-	xor	ecx, ecx
-	add	r9, r8
-	adc	rcx, -1
-	add	r9, rdx
-	adc	rcx, 0
-	js	_2
-_1:
-	dec	rdi
-	sub	r9, r11
-	sbb	rcx, 0
-	jns	_1
-_2:
+	mov	%r11, %rdx
+	mov	%rax, %rdi
+	imul	%rax, %rdx
+	mov	%rdx, %r9
+	mul	%r8
+	xor	%ecx, %ecx
+	add	%r8, %r9
+	adc	$-1, %rcx
+	add	%rdx, %r9
+	adc	$0, %rcx
+	js	2f
+1:	dec	%rdi
+	sub	%r11, %r9
+	sbb	$0, %rcx
+	jns	1b
+2:
 
-	lea	rbp, [rbp + r14 * 8]
-	mov	rsi, r11
-	neg	rsi
-
+	lea	(%rbp,%r14,8), %rbp
+	mov	%r11, %rsi
+	neg	%rsi			
 
 
 
-	align 16, db 0x90
-Ltop:
-	mov	rax, rdi
-	mul	rbx
-	mov	rcx, r10
-	add	rcx, rax
-	adc	rdx, rbx
-	mov	r9, rdx
-	imul	rdx, rsi
-	mov	rax, r8
-	lea	rbx, [rdx + r10]
-	xor	r10d, r10d
-	mul	r9
-	cmp	r13, r14
-	jg	L19
-	mov	r10, [r12]
-	sub	r12, 8
-L19:
-	sub	r10, r8
-	sbb	rbx, r11
-	sub	r10, rax
-	sbb	rbx, rdx
-	xor	eax, eax
-	xor	edx, edx
-	cmp	rbx, rcx
-	cmovnc	rax, r8
-	cmovnc	rdx, r11
-	adc	r9, 0
+
+	.align	16, 0x90
+Ltop:	mov	%rdi, %rax		
+	mul	%rbx			
+	mov	%r10, %rcx		
+	add	%rax, %rcx		
+	adc	%rbx, %rdx		
+	mov	%rdx, %r9		
+	imul	%rsi, %rdx		
+	mov	%r8, %rax		
+	lea	(%rdx, %r10), %rbx	
+	xor	%r10d, %r10d	
+	mul	%r9			
+	cmp	%r14, %r13		
+	jg	L19			
+	mov	(%r12), %r10		
+	sub	$8, %r12		
+L19:	sub	%r8, %r10		
+	sbb	%r11, %rbx		
+	sub	%rax, %r10		
+	sbb	%rdx, %rbx		
+	xor	%eax, %eax	
+	xor	%edx, %edx	
+	cmp	%rcx, %rbx		
+	cmovnc	%r8, %rax		
+	cmovnc	%r11, %rdx		
+	adc	$0, %r9			
 	nop
-	add	r10, rax
-	adc	rbx, rdx
-	cmp	rbx, r11
-	jae	Lfix
-Lbck:
-	mov	[rbp], r9
-	sub	rbp, 8
-	dec	r14
+	add	%rax, %r10		
+	adc	%rdx, %rbx		
+	cmp	%r11, %rbx		
+	jae	Lfix			
+Lbck:	mov	%r9, (%rbp)		
+	sub	$8, %rbp		
+	dec	%r14
 	jns	Ltop
 
-Lend:
-	mov	[r12 + 8], r10
-	mov	[r12 + 16], rbx
-	pop	rbx
-	pop	rbp
-	pop	r12
-	pop	r13
-	pop	r14
-	mov	rax, r15
-	pop	r15
-	pop	rsi
-	pop	rdi
+Lend:	mov	%r10, 8(%r12)
+	mov	%rbx, 16(%r12)
+	pop	%rbx
+	pop	%rbp
+	pop	%r12
+	pop	%r13
+	pop	%r14
+	mov	%r15, %rax
+	pop	%r15
+	pop	%rsi
+	pop	%rdi
 	ret
 
-Lfix:
-	seta	dl
-	cmp	r10, r8
-	setae	al
-	or	al, dl
+Lfix:	seta	%dl
+	cmp	%r8, %r10
+	setae	%al
+	orb	%dl, %al		
 	je	Lbck
-	inc	r9
-	sub	r10, r8
-	sbb	rbx, r11
+	inc	%r9
+	sub	%r8, %r10
+	sbb	%r11, %rbx
 	jmp	Lbck
 	

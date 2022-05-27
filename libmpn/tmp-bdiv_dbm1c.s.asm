@@ -1,68 +1,131 @@
-[Bits 64]
-	section .text
-	align 16, db 0x90
-	global __gmpn_bdiv_dbm1c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	16, 0x90
+	.globl	__gmpn_bdiv_dbm1c
 	
-	;.def	__gmpn_bdiv_dbm1c
-	;.scl	2
-	;.type	32
-	;.endef
+	.def	__gmpn_bdiv_dbm1c
+	.scl	2
+	.type	32
+	.endef
 __gmpn_bdiv_dbm1c:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	mov	r8, [rsp + 56]
-	mov	rax, [rsi]
-	mov	r9, rdx
-	mov	r11d, edx
-	mul	rcx
-	lea	rsi, [rsi + r9 * 8]
-	lea	rdi, [rdi + r9 * 8]
-	neg	r9
-	and	r11d, 3
+	mov	56(%rsp), %r8	
+	mov	(%rsi), %rax
+	mov	%rdx, %r9
+	mov	%edx, %r11d
+	mul	%rcx
+	lea	(%rsi,%r9,8), %rsi
+	lea	(%rdi,%r9,8), %rdi
+	neg	%r9
+	and	$3, %r11d
 	jz	Llo0
-	lea	r9, [r9 + r11 - 4]
-	cmp	r11d, 2
+	lea	-4(%r9,%r11), %r9
+	cmp	$2, %r11d
 	jc	Llo1
 	jz	Llo2
 	jmp	Llo3
 
-	align 16, db 0x90
-Ltop:
-	mov	rax, [rsi + r9 * 8]
-	mul	rcx
-Llo0:
-	sub	r8, rax
-	mov	[rdi + r9 * 8], r8
-	sbb	r8, rdx
-	mov	rax, [rsi + r9 * 8 + 8]
-	mul	rcx
-Llo3:
-	sub	r8, rax
-	mov	[rdi + r9 * 8 + 8], r8
-	sbb	r8, rdx
-	mov	rax, [rsi + r9 * 8 + 16]
-	mul	rcx
-Llo2:
-	sub	r8, rax
-	mov	[rdi + r9 * 8 + 16], r8
-	sbb	r8, rdx
-	mov	rax, [rsi + r9 * 8 + 24]
-	mul	rcx
-Llo1:
-	sub	r8, rax
-	mov	[rdi + r9 * 8 + 24], r8
-	sbb	r8, rdx
-	add	r9, 4
+	.align	16, 0x90
+Ltop:	mov	(%rsi,%r9,8), %rax
+	mul	%rcx
+Llo0:	sub	%rax, %r8
+	mov	%r8, (%rdi,%r9,8)
+	sbb	%rdx, %r8
+	mov	8(%rsi,%r9,8), %rax
+	mul	%rcx
+Llo3:	sub	%rax, %r8
+	mov	%r8, 8(%rdi,%r9,8)
+	sbb	%rdx, %r8
+	mov	16(%rsi,%r9,8), %rax
+	mul	%rcx
+Llo2:	sub	%rax, %r8
+	mov	%r8, 16(%rdi,%r9,8)
+	sbb	%rdx, %r8
+	mov	24(%rsi,%r9,8), %rax
+	mul	%rcx
+Llo1:	sub	%rax, %r8
+	mov	%r8, 24(%rdi,%r9,8)
+	sbb	%rdx, %r8
+	add	$4, %r9
 	jnz	Ltop
 
-	mov	rax, r8
-	pop	rsi
-	pop	rdi
+	mov	%r8, %rax
+	pop	%rsi
+	pop	%rdi
 	ret
 	

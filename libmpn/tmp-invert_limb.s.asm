@@ -1,72 +1,130 @@
-[Bits 64]
-	section .text
-	align 16, db 0x90
-	global __gmpn_invert_limb
-	extern __gmpn_invert_limb_table
-	;.def	__gmpn_invert_limb
-	;.scl	2
-	;.type	32
-	;.endef
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	16, 0x90
+	.globl	__gmpn_invert_limb
+	
+	.def	__gmpn_invert_limb
+	.scl	2
+	.type	32
+	.endef
 __gmpn_invert_limb:
 		
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
 
-	mov	rax, rdi
-	shr	rax, 55
-	
-	;.byte 0x4c,0x8d,0x05,0x00,0xfe,0xff,0xff
-	;NOTICE: changes
-	;lea	r8, qword [__gmpn_invert_limb_table - 512]
-	mov r8, __gmpn_invert_limb_table - 512
+	mov	%rdi, %rax		
+	shr	$55, %rax		
 
-	movzx	ecx, word [r8 + rax * 2]
+	lea	-512+__gmpn_invert_limb_table(%rip), %r8
+
+	movzwl	(%r8,%rax,2), %ecx	
 
 	
-	mov	rsi, rdi
-	mov	eax, ecx
-	imul	ecx, ecx
-	shr	rsi, 24
-	inc	rsi
-	imul	rcx, rsi
-	shr	rcx, 40
-	sal	eax, 11
-	dec	eax
-	sub	eax, ecx
+	mov	%rdi, %rsi		
+	mov	%ecx, %eax	
+	imul	%ecx, %ecx	
+	shr	$24, %rsi		
+	inc	%rsi			
+	imul	%rsi, %rcx		
+	shr	$40, %rcx		
+	sal	$11, %eax		
+	dec	%eax
+	sub	%ecx, %eax	
 
 	
-	mov	rcx, 0x1000000000000000
-	imul	rsi, rax
-	sub	rcx, rsi
-	imul	rcx, rax
-	sal	rax, 13
-	shr	rcx, 47
-	add	rcx, rax
+	mov	$0x1000000000000000, %rcx
+	imul	%rax, %rsi		
+	sub	%rsi, %rcx
+	imul	%rax, %rcx
+	sal	$13, %rax
+	shr	$47, %rcx
+	add	%rax, %rcx		
 
 	
-	mov	rsi, rdi
-	shr	rsi, 1
-	sbb	rax, rax
-	sub	rsi, rax
-	imul	rsi, rcx
-	and	rax, rcx
-	shr	rax, 1
-	sub	rax, rsi
-	mul	rcx
-	sal	rcx, 31
-	shr	rdx, 1
-	add	rcx, rdx
+	mov	%rdi, %rsi		
+	shr	%rsi			
+	sbb	%rax, %rax		
+	sub	%rax, %rsi		
+	imul	%rcx, %rsi		
+	and	%rcx, %rax		
+	shr	%rax			
+	sub	%rsi, %rax		
+	mul	%rcx
+	sal	$31, %rcx
+	shr	%rdx
+	add	%rdx, %rcx		
 
-	mov	rax, rdi
-	mul	rcx
-	add	rax, rdi
-	mov	rax, rcx
-	adc	rdx, rdi
-	sub	rax, rdx
+	mov	%rdi, %rax
+	mul	%rcx
+	add	%rdi, %rax
+	mov	%rcx, %rax
+	adc	%rdi, %rdx
+	sub	%rdx, %rax
 
-	pop	rsi
-	pop	rdi
+	pop	%rsi
+	pop	%rdi
 	ret
 	
 

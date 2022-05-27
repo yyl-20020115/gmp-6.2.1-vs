@@ -1,262 +1,313 @@
-[Bits 64]
-		section .rdata
-	align 2, db 0x90
-	global __gmpn_invert_limb_table
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		.section .rdata,"dr"
+	.align	2, 0x90
+	.globl __gmpn_invert_limb_table
 __gmpn_invert_limb_table:
-	dw 2045
-	dw 2037
-	dw 2029
-	dw 2021
-	dw 2013
-	dw 2005
-	dw 1998
-	dw 1990
-	dw 1983
-	dw 1975
-	dw 1968
-	dw 1960
-	dw 1953
-	dw 1946
-	dw 1938
-	dw 1931
-	dw 1924
-	dw 1917
-	dw 1910
-	dw 1903
-	dw 1896
-	dw 1889
-	dw 1883
-	dw 1876
-	dw 1869
-	dw 1863
-	dw 1856
-	dw 1849
-	dw 1843
-	dw 1836
-	dw 1830
-	dw 1824
-	dw 1817
-	dw 1811
-	dw 1805
-	dw 1799
-	dw 1792
-	dw 1786
-	dw 1780
-	dw 1774
-	dw 1768
-	dw 1762
-	dw 1756
-	dw 1750
-	dw 1745
-	dw 1739
-	dw 1733
-	dw 1727
-	dw 1722
-	dw 1716
-	dw 1710
-	dw 1705
-	dw 1699
-	dw 1694
-	dw 1688
-	dw 1683
-	dw 1677
-	dw 1672
-	dw 1667
-	dw 1661
-	dw 1656
-	dw 1651
-	dw 1646
-	dw 1641
-	dw 1636
-	dw 1630
-	dw 1625
-	dw 1620
-	dw 1615
-	dw 1610
-	dw 1605
-	dw 1600
-	dw 1596
-	dw 1591
-	dw 1586
-	dw 1581
-	dw 1576
-	dw 1572
-	dw 1567
-	dw 1562
-	dw 1558
-	dw 1553
-	dw 1548
-	dw 1544
-	dw 1539
-	dw 1535
-	dw 1530
-	dw 1526
-	dw 1521
-	dw 1517
-	dw 1513
-	dw 1508
-	dw 1504
-	dw 1500
-	dw 1495
-	dw 1491
-	dw 1487
-	dw 1483
-	dw 1478
-	dw 1474
-	dw 1470
-	dw 1466
-	dw 1462
-	dw 1458
-	dw 1454
-	dw 1450
-	dw 1446
-	dw 1442
-	dw 1438
-	dw 1434
-	dw 1430
-	dw 1426
-	dw 1422
-	dw 1418
-	dw 1414
-	dw 1411
-	dw 1407
-	dw 1403
-	dw 1399
-	dw 1396
-	dw 1392
-	dw 1388
-	dw 1384
-	dw 1381
-	dw 1377
-	dw 1374
-	dw 1370
-	dw 1366
-	dw 1363
-	dw 1359
-	dw 1356
-	dw 1352
-	dw 1349
-	dw 1345
-	dw 1342
-	dw 1338
-	dw 1335
-	dw 1332
-	dw 1328
-	dw 1325
-	dw 1322
-	dw 1318
-	dw 1315
-	dw 1312
-	dw 1308
-	dw 1305
-	dw 1302
-	dw 1299
-	dw 1295
-	dw 1292
-	dw 1289
-	dw 1286
-	dw 1283
-	dw 1280
-	dw 1276
-	dw 1273
-	dw 1270
-	dw 1267
-	dw 1264
-	dw 1261
-	dw 1258
-	dw 1255
-	dw 1252
-	dw 1249
-	dw 1246
-	dw 1243
-	dw 1240
-	dw 1237
-	dw 1234
-	dw 1231
-	dw 1228
-	dw 1226
-	dw 1223
-	dw 1220
-	dw 1217
-	dw 1214
-	dw 1211
-	dw 1209
-	dw 1206
-	dw 1203
-	dw 1200
-	dw 1197
-	dw 1195
-	dw 1192
-	dw 1189
-	dw 1187
-	dw 1184
-	dw 1181
-	dw 1179
-	dw 1176
-	dw 1173
-	dw 1171
-	dw 1168
-	dw 1165
-	dw 1163
-	dw 1160
-	dw 1158
-	dw 1155
-	dw 1153
-	dw 1150
-	dw 1148
-	dw 1145
-	dw 1143
-	dw 1140
-	dw 1138
-	dw 1135
-	dw 1133
-	dw 1130
-	dw 1128
-	dw 1125
-	dw 1123
-	dw 1121
-	dw 1118
-	dw 1116
-	dw 1113
-	dw 1111
-	dw 1109
-	dw 1106
-	dw 1104
-	dw 1102
-	dw 1099
-	dw 1097
-	dw 1095
-	dw 1092
-	dw 1090
-	dw 1088
-	dw 1086
-	dw 1083
-	dw 1081
-	dw 1079
-	dw 1077
-	dw 1074
-	dw 1072
-	dw 1070
-	dw 1068
-	dw 1066
-	dw 1064
-	dw 1061
-	dw 1059
-	dw 1057
-	dw 1055
-	dw 1053
-	dw 1051
-	dw 1049
-	dw 1047
-	dw 1044
-	dw 1042
-	dw 1040
-	dw 1038
-	dw 1036
-	dw 1034
-	dw 1032
-	dw 1030
-	dw 1028
-	dw 1026
-	dw 1024
+	.value	2045
+	.value	2037
+	.value	2029
+	.value	2021
+	.value	2013
+	.value	2005
+	.value	1998
+	.value	1990
+	.value	1983
+	.value	1975
+	.value	1968
+	.value	1960
+	.value	1953
+	.value	1946
+	.value	1938
+	.value	1931
+	.value	1924
+	.value	1917
+	.value	1910
+	.value	1903
+	.value	1896
+	.value	1889
+	.value	1883
+	.value	1876
+	.value	1869
+	.value	1863
+	.value	1856
+	.value	1849
+	.value	1843
+	.value	1836
+	.value	1830
+	.value	1824
+	.value	1817
+	.value	1811
+	.value	1805
+	.value	1799
+	.value	1792
+	.value	1786
+	.value	1780
+	.value	1774
+	.value	1768
+	.value	1762
+	.value	1756
+	.value	1750
+	.value	1745
+	.value	1739
+	.value	1733
+	.value	1727
+	.value	1722
+	.value	1716
+	.value	1710
+	.value	1705
+	.value	1699
+	.value	1694
+	.value	1688
+	.value	1683
+	.value	1677
+	.value	1672
+	.value	1667
+	.value	1661
+	.value	1656
+	.value	1651
+	.value	1646
+	.value	1641
+	.value	1636
+	.value	1630
+	.value	1625
+	.value	1620
+	.value	1615
+	.value	1610
+	.value	1605
+	.value	1600
+	.value	1596
+	.value	1591
+	.value	1586
+	.value	1581
+	.value	1576
+	.value	1572
+	.value	1567
+	.value	1562
+	.value	1558
+	.value	1553
+	.value	1548
+	.value	1544
+	.value	1539
+	.value	1535
+	.value	1530
+	.value	1526
+	.value	1521
+	.value	1517
+	.value	1513
+	.value	1508
+	.value	1504
+	.value	1500
+	.value	1495
+	.value	1491
+	.value	1487
+	.value	1483
+	.value	1478
+	.value	1474
+	.value	1470
+	.value	1466
+	.value	1462
+	.value	1458
+	.value	1454
+	.value	1450
+	.value	1446
+	.value	1442
+	.value	1438
+	.value	1434
+	.value	1430
+	.value	1426
+	.value	1422
+	.value	1418
+	.value	1414
+	.value	1411
+	.value	1407
+	.value	1403
+	.value	1399
+	.value	1396
+	.value	1392
+	.value	1388
+	.value	1384
+	.value	1381
+	.value	1377
+	.value	1374
+	.value	1370
+	.value	1366
+	.value	1363
+	.value	1359
+	.value	1356
+	.value	1352
+	.value	1349
+	.value	1345
+	.value	1342
+	.value	1338
+	.value	1335
+	.value	1332
+	.value	1328
+	.value	1325
+	.value	1322
+	.value	1318
+	.value	1315
+	.value	1312
+	.value	1308
+	.value	1305
+	.value	1302
+	.value	1299
+	.value	1295
+	.value	1292
+	.value	1289
+	.value	1286
+	.value	1283
+	.value	1280
+	.value	1276
+	.value	1273
+	.value	1270
+	.value	1267
+	.value	1264
+	.value	1261
+	.value	1258
+	.value	1255
+	.value	1252
+	.value	1249
+	.value	1246
+	.value	1243
+	.value	1240
+	.value	1237
+	.value	1234
+	.value	1231
+	.value	1228
+	.value	1226
+	.value	1223
+	.value	1220
+	.value	1217
+	.value	1214
+	.value	1211
+	.value	1209
+	.value	1206
+	.value	1203
+	.value	1200
+	.value	1197
+	.value	1195
+	.value	1192
+	.value	1189
+	.value	1187
+	.value	1184
+	.value	1181
+	.value	1179
+	.value	1176
+	.value	1173
+	.value	1171
+	.value	1168
+	.value	1165
+	.value	1163
+	.value	1160
+	.value	1158
+	.value	1155
+	.value	1153
+	.value	1150
+	.value	1148
+	.value	1145
+	.value	1143
+	.value	1140
+	.value	1138
+	.value	1135
+	.value	1133
+	.value	1130
+	.value	1128
+	.value	1125
+	.value	1123
+	.value	1121
+	.value	1118
+	.value	1116
+	.value	1113
+	.value	1111
+	.value	1109
+	.value	1106
+	.value	1104
+	.value	1102
+	.value	1099
+	.value	1097
+	.value	1095
+	.value	1092
+	.value	1090
+	.value	1088
+	.value	1086
+	.value	1083
+	.value	1081
+	.value	1079
+	.value	1077
+	.value	1074
+	.value	1072
+	.value	1070
+	.value	1068
+	.value	1066
+	.value	1064
+	.value	1061
+	.value	1059
+	.value	1057
+	.value	1055
+	.value	1053
+	.value	1051
+	.value	1049
+	.value	1047
+	.value	1044
+	.value	1042
+	.value	1040
+	.value	1038
+	.value	1036
+	.value	1034
+	.value	1032
+	.value	1030
+	.value	1028
+	.value	1026
+	.value	1024
 

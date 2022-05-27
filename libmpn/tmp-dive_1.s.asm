@@ -1,80 +1,143 @@
-[Bits 64]
-	section .text
-	align 16, db 0x90
-	global __gmpn_divexact_1
-	extern __gmp_binvert_limb_table
-	;.def	__gmpn_divexact_1
-	;.scl	2
-	;.type	32
-	;.endef
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	16, 0x90
+	.globl	__gmpn_divexact_1
+	
+	.def	__gmpn_divexact_1
+	.scl	2
+	.type	32
+	.endef
 __gmpn_divexact_1:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	push	rbx
+	push	%rbx
 
-	mov	rax, rcx
-	xor	ecx, ecx
-	mov	r8, rdx
+	mov	%rcx, %rax
+	xor	%ecx, %ecx	
+	mov	%rdx, %r8
 
-	bt	eax, 0
-	jnc	Levn
+	bt	$0, %eax
+	jnc	Levn			
 
-Lodd:
-	mov	rbx, rax
-	shr	eax, 1
-	and	eax, 127
+Lodd:	mov	%rax, %rbx
+	shr	%eax
+	and	$127, %eax		
 
-	;.byte 0x48,0x8d,0x15,0x00,0x00,0x00,0x00
-	;NOTICE: changes
-	;lea	rdx, qword [__gmp_binvert_limb_table]
-	mov rdx, __gmp_binvert_limb_table
-	movzx	eax, byte [rdx + rax]
+	
+	lea	__gmp_binvert_limb_table(%rip), %rdx
 
-	mov	r11, rbx
 
-	lea	edx, [rax + rax]
-	imul	eax, eax
-	imul	eax, ebx
-	sub	edx, eax
+	movzbl	(%rdx,%rax), %eax	
 
-	lea	eax, [rdx + rdx]
-	imul	edx, edx
-	imul	edx, ebx
-	sub	eax, edx
+	mov	%rbx, %r11		
 
-	lea	r10, [rax + rax]
-	imul	rax, rax
-	imul	rax, rbx
-	sub	r10, rax
+	lea	(%rax,%rax), %edx	
+	imul	%eax, %eax	
+	imul	%ebx, %eax	
+	sub	%eax, %edx	
 
-	lea	rsi, [rsi + r8 * 8]
-	lea	rdi, [rdi + r8 * 8 - 8]
-	neg	r8
+	lea	(%rdx,%rdx), %eax	
+	imul	%edx, %edx	
+	imul	%ebx, %edx	
+	sub	%edx, %eax	
 
-	mov	rax, [rsi + r8 * 8]
+	lea	(%rax,%rax), %r10	
+	imul	%rax, %rax		
+	imul	%rbx, %rax		
+	sub	%rax, %r10		
 
-	inc	r8
+	lea	(%rsi,%r8,8), %rsi	
+	lea	-8(%rdi,%r8,8), %rdi	
+	neg	%r8			
+
+	mov	(%rsi,%r8,8), %rax	
+
+	inc	%r8
 	jz	Lone
 
-	mov	rdx, [rsi + r8 * 8]
+	mov	(%rsi,%r8,8), %rdx	
 
-	shrd	rax, rdx, cl
+	shrd	%cl, %rdx, %rax
 
-	xor	ebx, ebx
+	xor	%ebx, %ebx
 	jmp	Lent
 
-Levn:
-	bsf	rcx, rax
-	shr	rax, cl
+Levn:	bsf	%rax, %rcx
+	shr	%cl, %rax
 	jmp	Lodd
 
-	align 8, db 0x90
+	.align	8, 0x90
 Ltop:
 	
 	
@@ -86,40 +149,38 @@ Ltop:
 	
 	
 
-	mul	r11
-	mov	rax, [rsi + r8 * 8 - 8]
-	mov	r9, [rsi + r8 * 8]
-	shrd	rax, r9, cl
-	nop
-	sub	rax, rbx
-	setc	bl
-	sub	rax, rdx
-	adc	rbx, 0
-Lent:
-	imul	rax, r10
-	mov	[rdi + r8 * 8], rax
-	inc	r8
+	mul	%r11			
+	mov	-8(%rsi,%r8,8), %rax	
+	mov	(%rsi,%r8,8), %r9	
+	shrd	%cl, %r9, %rax	
+	nop				
+	sub	%rbx, %rax		
+	setc	%bl			
+	sub	%rdx, %rax		
+	adc	$0, %rbx		
+Lent:	imul	%r10, %rax		
+	mov	%rax, (%rdi,%r8,8)	
+	inc	%r8			
 	jnz	Ltop
 
-	mul	r11
-	mov	rax, [rsi - 8]
-	shr	rax, cl
-	sub	rax, rbx
-	sub	rax, rdx
-	imul	rax, r10
-	mov	[rdi], rax
-	pop	rbx
-	pop	rsi
-	pop	rdi
+	mul	%r11			
+	mov	-8(%rsi), %rax		
+	shr	%cl, %rax
+	sub	%rbx, %rax		
+	sub	%rdx, %rax		
+	imul	%r10, %rax
+	mov	%rax, (%rdi)
+	pop	%rbx
+	pop	%rsi
+	pop	%rdi
 	ret
 
-Lone:
-	shr	rax, cl
-	imul	rax, r10
-	mov	[rdi], rax
-	pop	rbx
-	pop	rsi
-	pop	rdi
+Lone:	shr	%cl, %rax
+	imul	%r10, %rax
+	mov	%rax, (%rdi)
+	pop	%rbx
+	pop	%rsi
+	pop	%rdi
 	ret
 
 	

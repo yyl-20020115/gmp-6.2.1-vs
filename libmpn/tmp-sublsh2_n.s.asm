@@ -1,130 +1,200 @@
-[Bits 64]
-	section .text
-	align 8, db 0x90
-	global __gmpn_sublsh2_n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	8, 0x90
+	.globl	__gmpn_sublsh2_n
 	
-	;.def	__gmpn_sublsh2_n
-	;.scl	2
-	;.type	32
-	;.endef
+	.def	__gmpn_sublsh2_n
+	.scl	2
+	.type	32
+	.endef
 __gmpn_sublsh2_n:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	push	rbx
-	push	r12
+	push	%rbx
+	push	%r12
 
-	mov	eax, ecx
-	lea	rsi, [rsi + rcx * 8 + 24]
-	lea	rdx, [rdx + rcx * 8 + 24]
-	lea	rdi, [rdi + rcx * 8 + 24]
-	neg	rcx
+	mov	%ecx, %eax
+	lea	24(%rsi,%rcx,8), %rsi
+	lea	24(%rdx,%rcx,8), %rdx
+	lea	24(%rdi,%rcx,8), %rdi
+	neg	%rcx
 
-	xor	r11d, r11d
+	xor	%r11d, %r11d
 
-	mov	r8, [rdx + rcx * 8 - 24]
-	shrd	r11, r8, 62
+	mov	-24(%rdx,%rcx,8), %r8	
+	shrd	$62, %r8, %r11
 
-	and	eax, 3
+	and	$3, %eax
 	je	Lb0
-	cmp	eax, 2
+	cmp	$2, %eax
 	jc	Lb1
 	je	Lb2
 
-Lb3:
-	mov	r9, [rdx + rcx * 8 - 16]
-	shrd	r8, r9, 62
-	mov	r10, [rdx + rcx * 8 - 8]
-	shrd	r9, r10, 62
-	mov	r12, [rsi + rcx * 8 - 24]
-	sub	r12, r11
-	mov	[rdi + rcx * 8 - 24], r12
-	mov	r12, [rsi + rcx * 8 - 16]
-	sbb	r12, r8
-	mov	[rdi + rcx * 8 - 16], r12
-	mov	r12, [rsi + rcx * 8 - 8]
-	sbb	r12, r9
-	mov	[rdi + rcx * 8 - 8], r12
-	mov	r11, r10
-	sbb	eax, eax
-	add	rcx, 3
+Lb3:	mov	-16(%rdx,%rcx,8), %r9
+	shrd	$62, %r9, %r8
+	mov	-8(%rdx,%rcx,8), %r10
+	shrd	$62, %r10, %r9
+	mov	-24(%rsi,%rcx,8), %r12
+	sub	%r11, %r12
+	mov	%r12, -24(%rdi,%rcx,8)
+	mov	-16(%rsi,%rcx,8), %r12
+	sbb	%r8, %r12
+	mov	%r12, -16(%rdi,%rcx,8)
+	mov	-8(%rsi,%rcx,8), %r12
+	sbb	%r9, %r12
+	mov	%r12, -8(%rdi,%rcx,8)
+	mov	%r10, %r11
+	sbb	%eax, %eax	
+	add	$3, %rcx
 	js	Ltop
 	jmp	Lend
 
-Lb1:
-	mov	r12, [rsi + rcx * 8 - 24]
-	sub	r12, r11
-	mov	[rdi + rcx * 8 - 24], r12
-	mov	r11, r8
-	sbb	eax, eax
-	inc	rcx
+Lb1:	mov	-24(%rsi,%rcx,8), %r12
+	sub	%r11, %r12
+	mov	%r12, -24(%rdi,%rcx,8)
+	mov	%r8, %r11
+	sbb	%eax, %eax	
+	inc	%rcx
 	js	Ltop
 	jmp	Lend
 
-Lb2:
-	mov	r9, [rdx + rcx * 8 - 16]
-	shrd	r8, r9, 62
-	mov	r12, [rsi + rcx * 8 - 24]
-	sub	r12, r11
-	mov	[rdi + rcx * 8 - 24], r12
-	mov	r12, [rsi + rcx * 8 - 16]
-	sbb	r12, r8
-	mov	[rdi + rcx * 8 - 16], r12
-	mov	r11, r9
-	sbb	eax, eax
-	add	rcx, 2
+Lb2:	mov	-16(%rdx,%rcx,8), %r9
+	shrd	$62, %r9, %r8
+	mov	-24(%rsi,%rcx,8), %r12
+	sub	%r11, %r12
+	mov	%r12, -24(%rdi,%rcx,8)
+	mov	-16(%rsi,%rcx,8), %r12
+	sbb	%r8, %r12
+	mov	%r12, -16(%rdi,%rcx,8)
+	mov	%r9, %r11
+	sbb	%eax, %eax	
+	add	$2, %rcx
 	js	Ltop
 	jmp	Lend
 
-	align 16, db 0x90
-Ltop:
-	mov	r8, [rdx + rcx * 8 - 24]
-	shrd	r11, r8, 62
-Lb0:
-	mov	r9, [rdx + rcx * 8 - 16]
-	shrd	r8, r9, 62
-	mov	r10, [rdx + rcx * 8 - 8]
-	shrd	r9, r10, 62
-	mov	rbx, [rdx + rcx * 8]
-	shrd	r10, rbx, 62
+	.align	16, 0x90
+Ltop:	mov	-24(%rdx,%rcx,8), %r8
+	shrd	$62, %r8, %r11
+Lb0:	mov	-16(%rdx,%rcx,8), %r9
+	shrd	$62, %r9, %r8
+	mov	-8(%rdx,%rcx,8), %r10
+	shrd	$62, %r10, %r9
+	mov	(%rdx,%rcx,8), %rbx
+	shrd	$62, %rbx, %r10
 
-	add	eax, eax
+	add	%eax, %eax	
 
-	mov	r12, [rsi + rcx * 8 - 24]
-	sbb	r12, r11
-	mov	[rdi + rcx * 8 - 24], r12
+	mov	-24(%rsi,%rcx,8), %r12
+	sbb	%r11, %r12
+	mov	%r12, -24(%rdi,%rcx,8)
 
-	mov	r12, [rsi + rcx * 8 - 16]
-	sbb	r12, r8
-	mov	[rdi + rcx * 8 - 16], r12
+	mov	-16(%rsi,%rcx,8), %r12
+	sbb	%r8, %r12
+	mov	%r12, -16(%rdi,%rcx,8)
 
-	mov	r12, [rsi + rcx * 8 - 8]
-	sbb	r12, r9
-	mov	[rdi + rcx * 8 - 8], r12
+	mov	-8(%rsi,%rcx,8), %r12
+	sbb	%r9, %r12
+	mov	%r12, -8(%rdi,%rcx,8)
 
-	mov	r12, [rsi + rcx * 8]
-	sbb	r12, r10
-	mov	[rdi + rcx * 8], r12
+	mov	(%rsi,%rcx,8), %r12
+	sbb	%r10, %r12
+	mov	%r12, (%rdi,%rcx,8)
 
-	mov	r11, rbx
-	sbb	eax, eax
+	mov	%rbx, %r11
+	sbb	%eax, %eax	
 
-	add	rcx, 4
+	add	$4, %rcx
 	js	Ltop
 
-Lend:
-	shr	r11, 62
-	pop	r12
-	pop	rbx
-	sub	eax, r11d
-	neg	eax
-	pop	rsi
-	pop	rdi
+Lend:	shr	$62, %r11
+	pop	%r12
+	pop	%rbx
+	sub	%r11d, %eax
+	neg	%eax
+	pop	%rsi
+	pop	%rdi
 	ret
 	
 

@@ -1,168 +1,258 @@
-[Bits 64]
-	section .text
-	align 16, db 0x90
-	global __gmpn_mod_1_1p
-	extern __gmpn_invert_limb
-	;.def	__gmpn_mod_1_1p
-	;.scl	2
-	;.type	32
-	;.endef
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	16, 0x90
+	.globl	__gmpn_mod_1_1p
+	
+	.def	__gmpn_mod_1_1p
+	.scl	2
+	.type	32
+	.endef
 __gmpn_mod_1_1p:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	push	rbp
-	push	rbx
-	mov	rbx, rdx
-	mov	r8, rcx
+	push	%rbp
+	push	%rbx
+	mov	%rdx, %rbx
+	mov	%rcx, %r8
 
-	mov	rax, [rdi + rsi * 8 - 8]
-	cmp	rsi, 3
+	mov	-8(%rdi, %rsi, 8), %rax
+	cmp	$3, %rsi
 	jnc	Lfirst
-	mov	rbp, [rdi + rsi * 8 - 16]
+	mov	-16(%rdi, %rsi, 8), %rbp
 	jmp	Lreduce_two
 
 Lfirst:
 	
-	mov	r11, [r8 + 24]
-	mul	r11
-	mov	rbp, [rdi + rsi * 8 - 24]
-	add	rbp, rax
-	mov	rax, [rdi + rsi * 8 - 16]
-	adc	rax, rdx
-	sbb	rcx, rcx
-	sub	rsi, 4
+	mov	24(%r8), %r11
+	mul	%r11
+	mov	-24(%rdi, %rsi, 8), %rbp
+	add	%rax, %rbp
+	mov	-16(%rdi, %rsi, 8), %rax
+	adc	%rdx, %rax
+	sbb	%rcx, %rcx
+	sub	$4, %rsi
 	jc	Lreduce_three
 
-	mov	r10, r11
-	sub	r10, rbx
+	mov	%r11, %r10
+	sub	%rbx, %r10
 
-	align 16, db 0x90
-Ltop:
-	and	rcx, r11
-	lea	r9, [r10 + rbp]
-	mul	r11
-	add	rcx, rbp
-	mov	rbp, [rdi + rsi * 8]
-	cmovc	rcx, r9
-	add	rbp, rax
-	mov	rax, rcx
-	adc	rax, rdx
-	sbb	rcx, rcx
-	sub	rsi, 1
+	.align	16, 0x90
+Ltop:	and	%r11, %rcx
+	lea	(%r10, %rbp), %r9
+	mul	%r11
+	add	%rbp, %rcx
+	mov	(%rdi, %rsi, 8), %rbp
+	cmovc	%r9, %rcx
+	add	%rax, %rbp
+	mov	%rcx, %rax
+	adc	%rdx, %rax
+	sbb	%rcx, %rcx
+	sub	$1, %rsi
 	jnc	Ltop
 
 Lreduce_three:
 	
-	and	rcx, rbx
-	sub	rax, rcx
+	and	%rbx, %rcx
+	sub	%rcx, %rax
 
 Lreduce_two:
-	mov	ecx, [r8 + 8]
-	test	ecx, ecx
+	mov	8(%r8), %ecx
+	test	%ecx, %ecx
 	jz	Lnormalized
 
 	
-	mul	qword [r8 + 16]
-	xor	r9, r9
-	add	rbp, rax
-	adc	r9, rdx
-	mov	rax, r9
+	mulq	16(%r8)
+	xor	%r9, %r9
+	add	%rax, %rbp
+	adc	%rdx, %r9
+	mov	%r9, %rax
 
 	
 
-	shld	rax, rbp, cl
+	shld	%cl, %rbp, %rax
 
-	shl	rbp, cl
+	shl	%cl, %rbp
 	jmp	Ludiv
 
 Lnormalized:
-	mov	r9, rax
-	sub	r9, rbx
-	cmovnc	rax, r9
+	mov	%rax, %r9
+	sub	%rbx, %r9
+	cmovnc	%r9, %rax
 
 Ludiv:
-	lea	r9, [rax + 1]
-	mul	r8
-	add	rax, rbp
-	adc	rdx, r9
-	imul	rdx, rbx
-	sub	rbp, rdx
-	cmp	rax, rbp
-	lea	rax, [rbx + rbp]
-	cmovnc	rax, rbp
-	cmp	rax, rbx
+	lea	1(%rax), %r9
+	mulq	(%r8)
+	add	%rbp, %rax
+	adc	%r9, %rdx
+	imul	%rbx, %rdx
+	sub	%rdx, %rbp
+	cmp	%rbp, %rax
+	lea	(%rbx, %rbp), %rax
+	cmovnc	%rbp, %rax
+	cmp	%rbx, %rax
 	jnc	Lfix
-Lok:
-	shr	rax, cl
+Lok:	shr	%cl, %rax
 
-	pop	rbx
-	pop	rbp
-	pop	rsi
-	pop	rdi
+	pop	%rbx
+	pop	%rbp
+	pop	%rsi
+	pop	%rdi
 	ret
-Lfix:
-	sub	rax, rbx
+Lfix:	sub	%rbx, %rax
 	jmp	Lok
 	
 
-	align 16, db 0x90
-	global __gmpn_mod_1_1p_cps
+	.align	16, 0x90
+	.globl	__gmpn_mod_1_1p_cps
 	
-	;.def	__gmpn_mod_1_1p_cps
-	;.scl	2
-	;.type	32
-	;.endef
+	.def	__gmpn_mod_1_1p_cps
+	.scl	2
+	.type	32
+	.endef
 __gmpn_mod_1_1p_cps:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
 
-	push	rbp
-	bsr	rcx, rsi
-	push	rbx
-	mov	rbx, rdi
-	push	r12
-	xor	ecx, 63
-	mov	r12, rsi
-	mov	ebp, ecx
-	sal	r12, cl
+	push	%rbp
+	bsr	%rsi, %rcx
+	push	%rbx
+	mov	%rdi, %rbx
+	push	%r12
+	xor	$63, %ecx
+	mov	%rsi, %r12
+	mov	%ecx, %ebp
+	sal	%cl, %r12
 	
-	mov	rcx, r12
-	sub	rsp, 32
+	mov	%r12, %rcx		
+	sub	$32, %rsp	
 	
 	call	__gmpn_invert_limb
-	add	rsp, 32
-	neg	r12
-	mov	r8, r12
-	mov	[rbx], rax
-	mov	[rbx + 8], rbp
-	imul	r12, rax
-	mov	[rbx + 24], r12
-	mov	ecx, ebp
-	test	ecx, ecx
+	add	$32, %rsp	
+	neg	%r12
+	mov	%r12, %r8
+	mov	%rax, (%rbx)		
+	mov	%rbp, 8(%rbx)		
+	imul	%rax, %r12
+	mov	%r12, 24(%rbx)		
+	mov	%ebp, %ecx
+	test	%ecx, %ecx
 	jz	Lz
 
-	mov	edx, 1
+	mov	$1, %edx
 
-	shld	rdx, rax, cl
+	shld	%cl, %rax, %rdx
 
-	imul	r8, rdx
-	shr	r8, cl
-	mov	[rbx + 16], r8
+	imul	%rdx, %r8
+	shr	%cl, %r8
+	mov	%r8, 16(%rbx)		
 Lz:
-	pop	r12
-	pop	rbx
-	pop	rbp
-	pop	rsi
-	pop	rdi
+	pop	%r12
+	pop	%rbx
+	pop	%rbp
+	pop	%rsi
+	pop	%rdi
 	ret
 	
 

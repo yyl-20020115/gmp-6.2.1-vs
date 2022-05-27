@@ -1,125 +1,214 @@
-[Bits 64]
-	section .text
-	align 16, db 0x90
-	global __gmpn_rsblsh2_n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
-	;.def	__gmpn_rsblsh2_n
-	;.scl	2
-	;.type	32
-	;.endef
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	16, 0x90
+	.globl	__gmpn_rsblsh2_n
+	
+	.def	__gmpn_rsblsh2_n
+	.scl	2
+	.type	32
+	.endef
 __gmpn_rsblsh2_n:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	push	r12
-	push	r13
-	push	r14
-	push	r15
+	push	%r12
+	push	%r13
+	push	%r14
+	push	%r15
 
-	mov	r8, [rdx]
-	lea	r12, [r8 * 4]
-	shr	r8, 62
+	mov	(%rdx), %r8
+	lea	(,%r8,4), %r12
+	shr	$62, %r8
 
-	mov	eax, ecx
-	lea	rdi, [rdi + rcx * 8]
-	lea	rsi, [rsi + rcx * 8]
-	lea	rdx, [rdx + rcx * 8]
-	neg	rcx
-	and	al, 3
+	mov	%ecx, %eax
+	lea	(%rdi,%rcx,8), %rdi
+	lea	(%rsi,%rcx,8), %rsi
+	lea	(%rdx,%rcx,8), %rdx
+	neg	%rcx
+	and	$3, %al
 	je	Lb00
-	cmp	al, 2
+	cmp	$2, %al
 	jc	Lb01
 	je	Lb10
 
-Lb11:
-	mov	r10, [rdx + rcx * 8 + 8]
-	lea	r14, [r8 + r10 * 4]
-	shr	r10, 62
-	mov	r11, [rdx + rcx * 8 + 16]
-	lea	r15, [r10 + r11 * 4]
-	shr	r11, 62
-	sub	r12, [rsi + rcx * 8]
-	sbb	r14, [rsi + rcx * 8 + 8]
-	sbb	r15, [rsi + rcx * 8 + 16]
-	sbb	eax, eax
-	mov	[rdi + rcx * 8], r12
-	mov	[rdi + rcx * 8 + 8], r14
-	mov	[rdi + rcx * 8 + 16], r15
-	add	rcx, 3
+Lb11:	mov	8(%rdx,%rcx,8), %r10
+	lea	(%r8,%r10,4), %r14
+	shr	$62, %r10
+	mov	16(%rdx,%rcx,8), %r11
+	lea	(%r10,%r11,4), %r15
+	shr	$62, %r11
+	sub	(%rsi,%rcx,8), %r12
+	sbb	8(%rsi,%rcx,8), %r14
+	sbb	16(%rsi,%rcx,8), %r15
+	sbb	%eax, %eax		  
+	mov	%r12, (%rdi,%rcx,8)
+	mov	%r14, 8(%rdi,%rcx,8)
+	mov	%r15, 16(%rdi,%rcx,8)
+	add	$3, %rcx
 	js	Ltop
 	jmp	Lend
 
-Lb01:
-	mov	r11, r8
-	sub	r12, [rsi + rcx * 8]
-	sbb	eax, eax
-	mov	[rdi + rcx * 8], r12
-	add	rcx, 1
+Lb01:	mov	%r8, %r11
+	sub	(%rsi,%rcx,8), %r12
+	sbb	%eax, %eax		  
+	mov	%r12, (%rdi,%rcx,8)
+	add	$1, %rcx
 	js	Ltop
 	jmp	Lend
 
-Lb10:
-	mov	r11, [rdx + rcx * 8 + 8]
-	lea	r15, [r8 + r11 * 4]
-	shr	r11, 62
-	sub	r12, [rsi + rcx * 8]
-	sbb	r15, [rsi + rcx * 8 + 8]
-	sbb	eax, eax
-	mov	[rdi + rcx * 8], r12
-	mov	[rdi + rcx * 8 + 8], r15
-	add	rcx, 2
+Lb10:	mov	8(%rdx,%rcx,8), %r11
+	lea	(%r8,%r11,4), %r15
+	shr	$62, %r11
+	sub	(%rsi,%rcx,8), %r12
+	sbb	8(%rsi,%rcx,8), %r15
+	sbb	%eax, %eax		  
+	mov	%r12, (%rdi,%rcx,8)
+	mov	%r15, 8(%rdi,%rcx,8)
+	add	$2, %rcx
 	js	Ltop
 	jmp	Lend
 
-Lb00:
-	mov	r9, [rdx + rcx * 8 + 8]
-	mov	r10, [rdx + rcx * 8 + 16]
+Lb00:	mov	8(%rdx,%rcx,8), %r9
+	mov	16(%rdx,%rcx,8), %r10
 	jmp	Le00
 
-	align 16, db 0x90
-Ltop:
-	mov	r10, [rdx + rcx * 8 + 16]
-	mov	r8, [rdx + rcx * 8]
-	mov	r9, [rdx + rcx * 8 + 8]
-	lea	r12, [r11 + r8 * 4]
-	shr	r8, 62
-Le00:
-	lea	r13, [r8 + r9 * 4]
-	shr	r9, 62
-	mov	r11, [rdx + rcx * 8 + 24]
-	lea	r14, [r9 + r10 * 4]
-	shr	r10, 62
-	lea	r15, [r10 + r11 * 4]
-	shr	r11, 62
-	add	eax, eax
-	sbb	r12, [rsi + rcx * 8]
-	sbb	r13, [rsi + rcx * 8 + 8]
-	sbb	r14, [rsi + rcx * 8 + 16]
-	sbb	r15, [rsi + rcx * 8 + 24]
-	mov	[rdi + rcx * 8], r12
-	mov	[rdi + rcx * 8 + 8], r13
-	mov	[rdi + rcx * 8 + 16], r14
-	sbb	eax, eax
-	mov	[rdi + rcx * 8 + 24], r15
-	add	rcx, 4
+	.align	16, 0x90
+Ltop:	mov	16(%rdx,%rcx,8), %r10
+	mov	(%rdx,%rcx,8), %r8
+	mov	8(%rdx,%rcx,8), %r9
+	lea	(%r11,%r8,4), %r12
+	shr	$62, %r8
+Le00:	lea	(%r8,%r9,4), %r13
+	shr	$62, %r9
+	mov	24(%rdx,%rcx,8), %r11
+	lea	(%r9,%r10,4), %r14
+	shr	$62, %r10
+	lea	(%r10,%r11,4), %r15
+	shr	$62, %r11
+	add	%eax, %eax		  
+	sbb	(%rsi,%rcx,8), %r12
+	sbb	8(%rsi,%rcx,8), %r13
+	sbb	16(%rsi,%rcx,8), %r14
+	sbb	24(%rsi,%rcx,8), %r15
+	mov	%r12, (%rdi,%rcx,8)
+	mov	%r13, 8(%rdi,%rcx,8)
+	mov	%r14, 16(%rdi,%rcx,8)
+	sbb	%eax, %eax		  
+	mov	%r15, 24(%rdi,%rcx,8)
+	add	$4, %rcx
 	js	Ltop
 Lend:
 
 
-	add	eax, r11d
-	movsx	rax, eax
+	add	%r11d, %eax
+	movslq	%eax, %rax
 
-	pop	r15
-	pop	r14
-	pop	r13
-	pop	r12
-	pop	rsi
-	pop	rdi
+	pop	%r15
+	pop	%r14
+	pop	%r13
+	pop	%r12
+	pop	%rsi
+	pop	%rdi
 	ret
 	
 

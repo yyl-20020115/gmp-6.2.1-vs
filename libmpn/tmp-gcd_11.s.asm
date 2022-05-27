@@ -1,37 +1,113 @@
-[Bits 64]
-	section .text
-	align 64, db 0x90
-	global __gmpn_gcd_11
-	extern __gmpn_invert_limb
-	;.def	__gmpn_gcd_11
-	;.scl	2
-	;.type	32
-	;.endef
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	.text
+	.align	64, 0x90
+	.globl	__gmpn_gcd_11
+	
+	.def	__gmpn_gcd_11
+	.scl	2
+	.type	32
+	.endef
 __gmpn_gcd_11:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
 
 	jmp	Lodd
 
-	align 16, db 0x90
-Ltop:
-	cmovc	rdi, rdx
-	cmovc	rsi, rax
-	shr	rdi, cl
-Lodd:
-	mov	rdx, rsi
-	sub	rdx, rdi
-	bsf	rcx, rdx
-	mov	rax, rdi
-	sub	rdi, rsi
+	.align	16, 0x90
+Ltop:	cmovc	%rdx, %rdi		
+	cmovc	%rax, %rsi		
+	shr	%cl, %rdi
+Lodd:	mov	%rsi, %rdx
+	sub	%rdi, %rdx		
+	bsf	%rdx, %rcx
+	mov	%rdi, %rax
+	sub	%rsi, %rdi			
 	jnz	Ltop
 
 Lend:	
 	
-	pop	rsi
-	pop	rdi
+	pop	%rsi
+	pop	%rdi
 	ret
 	

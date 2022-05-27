@@ -1,168 +1,235 @@
-[Bits 64]
-	section .text
-	align 16, db 0x90
-	global __gmpn_bdiv_q_1
-	extern __gmp_binvert_limb_table
-	;.def	__gmpn_bdiv_q_1
-	;.scl	2
-	;.type	32
-	;.endef
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+
+
+
+
+
+	.text
+	.align	16, 0x90
+	.globl	__gmpn_bdiv_q_1
+	
+	.def	__gmpn_bdiv_q_1
+	.scl	2
+	.type	32
+	.endef
 __gmpn_bdiv_q_1:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	push	rbx
+	push	%rbx
 
-	mov	rax, rcx
-	xor	ecx, ecx
-	mov	r10, rdx
+	mov	%rcx, %rax
+	xor	%ecx, %ecx	
+	mov	%rdx, %r10
 
-	bt	eax, 0
-	jnc	Levn
+	bt	$0, %eax
+	jnc	Levn			
 
-Lodd:
-	mov	rbx, rax
-	shr	eax, 1
-	and	eax, 127
+Lodd:	mov	%rax, %rbx
+	shr	%eax
+	and	$127, %eax		
 
-	;.byte 0x48,0x8d,0x15,0x00,0x00,0x00,0x00
-	;NOTICE: changes
-	;lea	rdx,qword [__gmp_binvert_limb_table]
-	mov rdx, __gmp_binvert_limb_table
-	movzx	eax, byte [rdx + rax]
+	
+	lea	__gmp_binvert_limb_table(%rip), %rdx
 
-	mov	r11, rbx
 
-	lea	edx, [rax + rax]
-	imul	eax, eax
-	imul	eax, ebx
-	sub	edx, eax
+	movzbl	(%rdx,%rax), %eax	
 
-	lea	eax, [rdx + rdx]
-	imul	edx, edx
-	imul	edx, ebx
-	sub	eax, edx
+	mov	%rbx, %r11		
 
-	lea	r8, [rax + rax]
-	imul	rax, rax
-	imul	rax, rbx
-	sub	r8, rax
+	lea	(%rax,%rax), %edx	
+	imul	%eax, %eax	
+	imul	%ebx, %eax	
+	sub	%eax, %edx	
+
+	lea	(%rdx,%rdx), %eax	
+	imul	%edx, %edx	
+	imul	%ebx, %edx	
+	sub	%edx, %eax	
+
+	lea	(%rax,%rax), %r8	
+	imul	%rax, %rax		
+	imul	%rbx, %rax		
+	sub	%rax, %r8		
 
 	jmp	Lpi1
 
-Levn:
-	bsf	rcx, rax
-	shr	rax, cl
+Levn:	bsf	%rax, %rcx
+	shr	%cl, %rax
 	jmp	Lodd
 	
 
-	global __gmpn_pi1_bdiv_q_1
+	.globl	__gmpn_pi1_bdiv_q_1
 	
-	;.def	__gmpn_pi1_bdiv_q_1
-	;.scl	2
-	;.type	32
-	;.endef
+	.def	__gmpn_pi1_bdiv_q_1
+	.scl	2
+	.type	32
+	.endef
 __gmpn_pi1_bdiv_q_1:
 
-	push	rdi
-	push	rsi
-	mov	rdi, rcx
-	mov	rsi, rdx
-	mov	rdx, r8
-	mov	rcx, r9
+	push	%rdi
+	push	%rsi
+	mov	%rcx, %rdi
+	mov	%rdx, %rsi
+	mov	%r8, %rdx
+	mov	%r9, %rcx
 
-	mov	r8, [rsp + 56]
-	mov	r9, [rsp + 64]
-	push	rbx
+	mov	56(%rsp), %r8	
+	mov	64(%rsp), %r9	
+	push	%rbx
 
-	mov	r11, rcx
-	mov	r10, rdx
-	mov	rcx, r9
+	mov	%rcx, %r11		
+	mov	%rdx, %r10		
+	mov	%r9, %rcx		
 
-Lpi1:
-	mov	rax, [rsi]
+Lpi1:	mov	(%rsi), %rax		
 
-	dec	r10
+	dec	%r10
 	jz	Lone
 
-	lea	rsi, [rsi + r10 * 8 + 8]
-	lea	rdi, [rdi + r10 * 8]
-	neg	r10
+	lea	8(%rsi,%r10,8), %rsi	
+	lea	(%rdi,%r10,8), %rdi		
+	neg	%r10			
 
-	test	ecx, ecx
-	jnz	Lunorm
-	xor	ebx, ebx
+	test	%ecx, %ecx
+	jnz	Lunorm		
+	xor	%ebx, %ebx
 	jmp	Lnent
 
-	align 8, db 0x90
-Lntop:
-mul	r11
-	mov	rax, [rsi + r10 * 8 - 8]
-	sub	rax, rbx
-	setc	bl
-	sub	rax, rdx
-	adc	ebx, 0
-Lnent:
-imul	rax, r8
-	mov	[rdi + r10 * 8], rax
-	inc	r10
+	.align	8, 0x90
+Lntop:mul	%r11			
+	mov	-8(%rsi,%r10,8), %rax	
+	sub	%rbx, %rax		
+	setc	%bl		
+	sub	%rdx, %rax		
+	adc	$0, %ebx		
+Lnent:imul	%r8, %rax		
+	mov	%rax, (%rdi,%r10,8)	
+	inc	%r10			
 	jnz	Lntop
 
-	mov	r9, [rsi - 8]
+	mov	-8(%rsi), %r9		
 	jmp	Lcom
 
 Lunorm:
-	mov	r9, [rsi + r10 * 8]
-	shr	rax, cl
-	neg	ecx
-	shl	r9, cl
-	neg	ecx
-	or	rax, r9
-	xor	ebx, ebx
+	mov	(%rsi,%r10,8), %r9	
+	shr	%cl, %rax		
+	neg	%ecx
+	shl	%cl, %r9		
+	neg	%ecx
+	or	%r9, %rax
+	xor	%ebx, %ebx
 	jmp	Luent
 
-	align 8, db 0x90
-Lutop:
-mul	r11
-	mov	rax, [rsi + r10 * 8]
-	shl	rax, cl
-	neg	ecx
-	or	rax, r9
-	sub	rax, rbx
-	setc	bl
-	sub	rax, rdx
-	adc	ebx, 0
-Luent:
-imul	rax, r8
-	mov	r9, [rsi + r10 * 8]
-	shr	r9, cl
-	neg	ecx
-	mov	[rdi + r10 * 8], rax
-	inc	r10
+	.align	8, 0x90
+Lutop:mul	%r11			
+	mov	(%rsi,%r10,8), %rax	
+	shl	%cl, %rax		
+	neg	%ecx
+	or	%r9, %rax
+	sub	%rbx, %rax		
+	setc	%bl		
+	sub	%rdx, %rax		
+	adc	$0, %ebx		
+Luent:imul	%r8, %rax		
+	mov	(%rsi,%r10,8), %r9	
+	shr	%cl, %r9		
+	neg	%ecx
+	mov	%rax, (%rdi,%r10,8)	
+	inc	%r10			
 	jnz	Lutop
 
-Lcom:
-	mul	r11
-	sub	r9, rbx
-	sub	r9, rdx
-	imul	r9, r8
-	mov	[rdi], r9
-	pop	rbx
-	pop	rsi
-	pop	rdi
+Lcom:	mul	%r11			
+	sub	%rbx, %r9		
+	sub	%rdx, %r9		
+	imul	%r8, %r9
+	mov	%r9, (%rdi)
+	pop	%rbx
+	pop	%rsi
+	pop	%rdi
 	ret
 
-Lone:
-	shr	rax, cl
-	imul	rax, r8
-	mov	[rdi], rax
-	pop	rbx
-	pop	rsi
-	pop	rdi
+Lone:	shr	%cl, %rax
+	imul	%r8, %rax
+	mov	%rax, (%rdi)
+	pop	%rbx
+	pop	%rsi
+	pop	%rdi
 	ret
 	
