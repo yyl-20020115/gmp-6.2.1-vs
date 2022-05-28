@@ -301,6 +301,7 @@
     <ClCompile Include="powm_sec.c" />
     <ClCompile Include="powm_ui.c" />
     <ClCompile Include="pow_ui.c" />
+    <ClCompile Include="pprime_p.c" />
     <ClCompile Include="primorial_ui.c" />
     <ClCompile Include="prodlimbs.c" />
     <ClCompile Include="random.c" />

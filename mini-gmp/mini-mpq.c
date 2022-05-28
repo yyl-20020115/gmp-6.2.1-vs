@@ -40,6 +40,7 @@ see https://www.gnu.org/licenses/.  */
 #include <string.h>
 
 #include "mini-mpq.h"
+#define GMP_LIMB_MAX ((mp_limb_t) ~ (mp_limb_t) 0)
 
 #ifndef GMP_LIMB_HIGHBIT
 /* Define macros and static functions already defined by mini-gmp.c */

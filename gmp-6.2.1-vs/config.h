@@ -138,7 +138,7 @@ see https://www.gnu.org/licenses/.
 /* #undef HAVE_GETSYSINFO */
 
 /* Define to 1 if you have the `gettimeofday' function. */
-#define HAVE_GETTIMEOFDAY 1
+#define HAVE_GETTIMEOFDAY 0
 
 /* Define to 1 if the compiler accepts gcc style __attribute__ ((visibility))
    and __attribute__ ((alias)) */
@@ -510,7 +510,7 @@ see https://www.gnu.org/licenses/.
 #define HAVE_SYS_TIMES_H 1
 
 /* Define to 1 if you have the <sys/time.h> header file. */
-#define HAVE_SYS_TIME_H 1
+#define HAVE_SYS_TIME_H 0
 
 /* Define to 1 if you have the <sys/types.h> header file. */
 #define HAVE_SYS_TYPES_H 1
@@ -585,7 +585,7 @@ see https://www.gnu.org/licenses/.
 #define STDC_HEADERS 1
 
 /* Define to 1 if you can safely include both <sys/time.h> and <time.h>. */
-#define TIME_WITH_SYS_TIME 1
+#define TIME_WITH_SYS_TIME 0
 
 /* Maximum size the tune program can test for SQR_TOOM2_THRESHOLD */
 /* #undef TUNE_SQR_TOOM2_MAX */
@@ -667,3 +667,7 @@ see https://www.gnu.org/licenses/.
 /* Define to empty if the keyword `volatile' does not work. Warning: valid
    code using `volatile' can become incorrect without. Disable with care. */
 /* #undef volatile */
+
+#ifndef STDOUT_FILENO
+#define STDOUT_FILENO 1
+#endif

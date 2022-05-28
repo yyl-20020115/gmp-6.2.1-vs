@@ -497,5 +497,8 @@
     <ClCompile Include="mul_2exp.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="pprime_p.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
