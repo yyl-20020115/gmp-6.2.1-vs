@@ -57,7 +57,7 @@ see https://www.gnu.org/licenses/.
 
 /* Define to 1 if the compiler accepts gcc style __attribute__ ((mode (XX)))
    */
-#define HAVE_ATTRIBUTE_MODE 0
+//#define HAVE_ATTRIBUTE_MODE 0
 
 /* Define to 1 if the compiler accepts gcc style __attribute__ ((noreturn)) */
 #define HAVE_ATTRIBUTE_NORETURN 0
@@ -108,7 +108,7 @@ see https://www.gnu.org/licenses/.
 #define HAVE_DECL_VFPRINTF 1
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-#define HAVE_DLFCN_H 1
+//#define HAVE_DLFCN_H 1
 
 /* Define one of the following to 1 for the format of a `double'.
    If your format is not among these choices, or you don't know what it is,
@@ -670,4 +670,11 @@ see https://www.gnu.org/licenses/.
 
 #ifndef STDOUT_FILENO
 #define STDOUT_FILENO 1
+#endif
+
+#define HAVE_LITTLE_ENDIAN 1
+#define HAVE_STDARG 1
+
+#ifndef NULL
+#define NULL 0
 #endif
